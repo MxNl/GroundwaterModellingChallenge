@@ -1,0 +1,48 @@
+targets_import <- list(
+  tar_target(
+    data_all,
+    import_data_allwells_github(PATH_GITHUB_GROUNDWATERCHALLENGE)
+  ),
+  if (SINGLE_WELL) {
+    tar_target(
+      data,
+      data_all %>%
+        group_by(well_id) %>%
+        group_split() %>%
+        chuck(1) %>%
+        group_by(well_id) %>%
+        group_split(),
+      iteration = "list"
+    )
+  },
+  if (!SINGLE_WELL) {
+    tar_target(
+      data,
+      data_all %>%
+        group_by(well_id) %>%
+        group_split(),
+      iteration = "list"
+    )
+  },
+  if (SINGLE_WELL) {
+    tar_target(
+      split_dates,
+      SPLIT_DATES %>%
+        group_by(well_id) %>%
+        group_split() %>%
+        chuck(1) %>%
+        group_by(well_id) %>%
+        group_split(),
+      iteration = "list"
+    )
+  },
+  if (!SINGLE_WELL) {
+    tar_target(
+      split_dates,
+      SPLIT_DATES %>%
+        group_by(well_id) %>%
+        group_split(),
+      iteration = "list"
+    )
+  }
+)
