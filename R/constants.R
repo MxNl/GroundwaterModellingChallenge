@@ -13,3 +13,8 @@ SPLIT_DATES <- tibble::tribble(
   "USA", "2002-03-01", "2016-12-26"
 )
 SINGLE_WELL <- purrr::chuck(YML_CONFIG, "single_well")
+INITIAL_PROP <- purrr::chuck(YML_CONFIG, "initial_prop")
+CV_INITIAL <- purrr::chuck(YML_CONFIG, "cv_initial")
+CV_ASSESS <- purrr::chuck(YML_CONFIG, "cv_assess")
+CV_SKIP <- purrr::chuck(YML_CONFIG, "cv_skip")
+CV_LAG <- purrr::chuck(YML_CONFIG, "cv_lag")

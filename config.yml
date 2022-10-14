@@ -1,2 +1,7 @@
 parallel: FALSE
 single_well: TRUE
+initial_prop: 0.9
+cv_initial: 2000
+cv_assess: 600
+cv_skip: 600
+cv_lag: 365

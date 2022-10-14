@@ -42,6 +42,7 @@ import_data_allwells_github <- function(path) {
     full_join(data_predictors, by = c("identifier", "date")) |>
     rename(well_id = identifier) |>
     relocate(well_id, date, gwl) |>
-    arrange(well_id, date)
+    arrange(well_id, date) |> 
+    mutate(date = date |> as.character() |> lubridate::as_date())
 }
   

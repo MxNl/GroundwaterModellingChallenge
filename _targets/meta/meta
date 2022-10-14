@@ -5,27 +5,50 @@ test_bfd68b7c|branch|b3de2576be690295|cdaa449074cd8e9e|24b356397dec900a|20377128
 test_03133730|branch|a85e41dd019ee2c8|cdaa449074cd8e9e|8f415a2698cbf668|1925882931||t19272.4749274663s|69e5b5ee6731115e|322840|rds|list|test||0||
 test_bf21e831|branch|f839bb0af4f3e7ce|cdaa449074cd8e9e|18bdcb26fe9d3f71|666651701||t19272.4749319802s|857d20e6e1581d23|177448|rds|list|test||0.02||
 test|pattern|56311c4efbdf9533|cdaa449074cd8e9e||1064684737||||1480997|rds|list||test_ce803bae*test_9c470e51*test_bfd68b7c*test_03133730*test_bf21e831|11.9||
-data_all|stem|cc14d31abe9513f6|1c65e39940b7a81a|2168d450b28de50c|-1004549426||t19272.4846096702s|165523cd7acbc061|1442717|rds|vector|||18.31|Paket forcats wurde unter R Version 4.1.3 erstellt|
 data_no_empty_cols_4837bb13|branch||d0f144b16e2f366a|011b9d802553e33a|-627108221||t19272.4924170153s||0|rds|list|data_no_empty_cols||11.86|Paket forcats wurde unter R Version 4.1.3 erstellt|x muss ein Array mit mindestens zwei Dimensionen sein
-data|stem|4c10c006d6817840|16a75b603e442b5a|ffe93a8780a9aa3b|1588979285||t19272.495462256s|3cd7ba71bcd51f32|326722|rds|list||data_81813f5c|11.86|Paket forcats wurde unter R Version 4.1.3 erstellt|
 data_no_empty_cols_ce803bae|branch|e89b17d92a05a40a|d0f144b16e2f366a|f2ba08449a46d54d|584979021||t19272.495964342s|7b2163c77f0bc410|324752|rds|list|data_no_empty_cols||11.87|Paket forcats wurde unter R Version 4.1.3 erstellt|
-data_no_empty_cols|pattern|c59c7f32679bc8f2|d0f144b16e2f366a||-15274340||||324752|rds|list||data_no_empty_cols_ce803bae|11.87||
-targets_modelling|object|b141bf1a95fd0e4a||||||||||||||
-split_dates|stem|6c1d3d7b35ceed33|4b9fa40423fe3894|66b9a99501c02d6c|-1951270263||t19272.5303088569s|03ef7a88723dc598|242|rds|list||split_dates_8c74d30d|11.61|Paket forcats wurde unter R Version 4.1.3 erstellt|
-PARALLEL|object|3139974ca770b82a||||||||||||||
+data_modelling_3859ab33|branch|82928bd07587961d|1b200eba11c772de|0d3f1a96af752e66|985461301||t19272.533978537s|19322aba914be58e|156043|rds|list|data_modelling||11.83|Paket forcats wurde unter R Version 4.1.3 erstellt|
+data_prediction_3859ab33|branch|8591e2ea0976413b|82a06b851aed21e3|756e2c60fdc78bcf|1855489310||t19272.5339873102s|6083d36330285790|54480|rds|list|data_prediction||0.03||
+data_no_empty_cols_ac9cb2a5|branch|d933013a2a672cf2|d0f144b16e2f366a|9badb7f33c8bea32|-885193904||t19279.4313096309s|4b1e82e910e7484b|324750|rds|list|data_no_empty_cols||0.002||
+data_modelling_9503b701|branch|c0e3123e5cf13e70|1b200eba11c772de|01d415049b0fd20b|316862982||t19279.4313183228s|9c78aebc38f35ead|156042|rds|list|data_modelling||0.035||
+data_prediction_9503b701|branch|2df398302e43a1f9|82a06b851aed21e3|9562080983bd6adc|-136136136||t19279.4313264753s|1f84c43fab5fa4b4|54479|rds|list|data_prediction||0.018||
+split_dates|stem|3b0fac3ce464932a|305d5fc36bbf54f3|11fad2af8cd42c54|-1951270263||t19279.4424031855s|5447202e06fd19c7|241|rds|list||split_dates_56cd7bcb|7.379||
+data_all|stem|e363e263def5e330|1c65e39940b7a81a|9be0fd17e97c7d5d|-1004549426||t19279.5317369634s|f39275f2dc0bba57|1442708|rds|vector|||17.692||
+data|stem|b21b1df87bae9c1a|a42af5cfe52b07ed|47e5d8ad12fffb39|1588979285||t19279.5317416893s|3cc675129c47149f|326706|rds|list||data_726635b4|0.02||
+data_no_empty_cols_1702f254|branch|93b52e6c361d4ab1|d0f144b16e2f366a|b1f7167a26e8bd74|-352191283||t19279.5317477782s|1d95cddee6c5ab76|324739|rds|list|data_no_empty_cols||0.002||
+data_no_empty_cols|pattern|d55275c5c7c1f158|d0f144b16e2f366a||-15274340||||324739|rds|list||data_no_empty_cols_1702f254|0.002||
+data_modelling_d449e666|branch|92af6b8dfa199150|1b200eba11c772de|b527976901cb9f9d|-1734189618||t19279.5317563848s|a498f5e24c550dd4|156030|rds|list|data_modelling||0.035||
+data_modelling|pattern|abe6a11d8dd7723a|1b200eba11c772de||436128794||||156030|rds|list||data_modelling_d449e666|0.035||
+data_prediction_d449e666|branch|997ee5e8b0fb999c|82a06b851aed21e3|430376c61685f3b4|1238510013||t19279.5317647256s|f990bd781599da46|54475|rds|list|data_prediction||0.018||
+data_prediction|pattern|d956421699645d2c|82a06b851aed21e3||-2083821375||||54475|rds|list||data_prediction_d449e666|0.018||
+initial_split|pattern|77324a3fe28ad806|752c14f7d5d43c05||-1396285838||||156211|rds|list||initial_split_e0821dc8|7.504||
+initial_split_e0821dc8|branch|616d4e6c493b0a0d|6f130856d9ef7197|6ac0ab7458f59893|170921628||t19279.572112879s|42fbee5dabb3e292|156211|rds|list|initial_split||7.773||
+resampling_71b8b842|branch|edcecb6d21ca1502|7f72964fef4e84c1|3e938815e267c158|1446002481||t19279.5721438336s|9d83ae31afc08c21|565729|rds|list|resampling||1.866||
+resampling|pattern|f166782c92eec4eb|7f72964fef4e84c1||1707484335||||565729|rds|list||resampling_71b8b842|1.866||
+recipe_bd01258d|branch||3eb4658a9c6101cb|18a0c7392a691004|-1845038251||t19279.5721521708s||0|rds|list|recipe||7.398||x should be an rsplit object
+PARALLEL|object|df161ddba3dacc9e||||||||||||||
 list.files.github|function|96f7b29ecd8217cb||||||||||||||
 PATH_GITHUB_GROUNDWATERCHALLENGE|object|c91b4acb0e179974||||||||||||||
 PATH_GITHUB_REPO|object|69689542ee2074e2||||||||||||||
 read_csv_and_add_path_as_column|function|336d2d2f298d66e8||||||||||||||
-targets_preprocessing|object|6431db32c19e51ab||||||||||||||
-SPLIT_DATES|object|dee86fa27013a095||||||||||||||
-SINGLE_WELL|object|0505a9e7ec7c6343||||||||||||||
-YML_CONFIG|object|69555ee32b201b35||||||||||||||
-targets_import|object|98937af5242e3e40||||||||||||||
+CV_SKIP|object|f94e0a4d8c140185||||||||||||||
+targets_preprocessing|object|c5a2d0689e0e29ba||||||||||||||
+INITIAL_PROP|object|f32584bad524086c||||||||||||||
+targets_modelling|object|16b573b67b6f689b||||||||||||||
+SPLIT_DATES|object|69cbccc71596f661||||||||||||||
+CV_INITIAL|object|f9741ecbb08fa11d||||||||||||||
+CV_ASSESS|object|f94e0a4d8c140185||||||||||||||
+CV_LAG|object|dd7fa6c74dc11534||||||||||||||
+SINGLE_WELL|object|909013909b1f03d4||||||||||||||
+YML_CONFIG|object|33b6706c1f29618a||||||||||||||
+slice_by_wellid|function|423d2139cf193277||||||||||||||
+make_recipe|function|dbc01e58eb7ef2c2||||||||||||||
+targets_import|object|979da2afe769bcc1||||||||||||||
 path_targets|object|25dd98ece6e7ce64||||||||||||||
 path_functions|object|59af2dd4153e940d||||||||||||||
-import_data_allwells_github|function|e4ea4d1914e789dd||||||||||||||
-data_modelling_3859ab33|branch|82928bd07587961d|1b200eba11c772de|0d3f1a96af752e66|985461301||t19272.533978537s|19322aba914be58e|156043|rds|list|data_modelling||11.83|Paket forcats wurde unter R Version 4.1.3 erstellt|
-data_modelling|pattern|e46a864a6183bf03|1b200eba11c772de||436128794||||156043|rds|list||data_modelling_3859ab33|11.83||
-data_prediction_3859ab33|branch|8591e2ea0976413b|82a06b851aed21e3|756e2c60fdc78bcf|1855489310||t19272.5339873102s|6083d36330285790|54480|rds|list|data_prediction||0.03||
-data_prediction|pattern|9612dd764d0a2cee|82a06b851aed21e3||-2083821375||||54480|rds|list||data_prediction_3859ab33|0.03||
+import_data_allwells_github|function|2cab918459d4025f||||||||||||||
+make_resampling|function|d814e822b04fb72d||||||||||||||
+recipe_71b8b842|branch|035eeb5386447ff6|c0d6061bff468181|91e92bd3ea21a249|1570359219||t19279.5916862204s|7d8d1b5edd53b8ed|284749|rds|list|recipe||7.478||
+recipe|pattern|4820842dab8ee4b7|c0d6061bff468181||1894568478||||284749|rds|list||recipe_71b8b842|7.478||
+plot_resamplingstrategy_bd01258d|branch|b766ea5f43084ac0|aeff7cf582cbbe4b|50df2ede971d43eb|-389338760||t19279.5917120476s|f67e6d5581137541|4352707|rds|list|plot_resamplingstrategy||0.073||
+plot_resamplingstrategy|pattern|2a8aac1f77db7894|aeff7cf582cbbe4b||-1582173113||||4352707|rds|list||plot_resamplingstrategy_bd01258d|0.073||

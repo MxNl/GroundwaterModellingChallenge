@@ -43,5 +43,6 @@ if(PARALLEL) plan(multisession)
 # Define targets
 c(
   targets_import,
-  targets_preprocessing
+  targets_preprocessing,
+  targets_modelling
 )

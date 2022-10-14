@@ -7,9 +7,7 @@ targets_import <- list(
     tar_target(
       data,
       data_all %>%
-        group_by(well_id) %>%
-        group_split() %>%
-        chuck(1) %>%
+        slice_by_wellid() %>%
         group_by(well_id) %>%
         group_split(),
       iteration = "list"
@@ -28,9 +26,7 @@ targets_import <- list(
     tar_target(
       split_dates,
       SPLIT_DATES %>%
-        group_by(well_id) %>%
-        group_split() %>%
-        chuck(1) %>%
+        slice_by_wellid() %>%
         group_by(well_id) %>%
         group_split(),
       iteration = "list"
