@@ -7,24 +7,31 @@ targets_preprocessing <- list(
     iteration = "list"
   ),
   tar_target(
-    data_modelling,
+    data_imputed,
     data_no_empty_cols %>%
+      mutate(gwl = zoo::na.approx(gwl)),
+    pattern = map(data_no_empty_cols),
+    iteration = "list"
+  ),
+  tar_target(
+    data_modelling,
+    data_imputed %>%
       filter(date >= split_dates %>%
         pull(train_start) %>%
         lubridate::as_date()) %>%
       filter(date <= split_dates %>%
         pull(train_end) %>%
         lubridate::as_date()),
-    pattern = map(data_no_empty_cols, split_dates),
+    pattern = map(data_imputed, split_dates),
     iteration = "list"
   ),
   tar_target(
     data_prediction,
-    data_no_empty_cols %>%
+    data_imputed %>%
       filter(date > split_dates %>%
         pull(train_end) %>%
         lubridate::as_date()),
-    pattern = map(data_no_empty_cols, split_dates),
+    pattern = map(data_imputed, split_dates),
     iteration = "list"
   )
 )

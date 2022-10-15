@@ -1,7 +1,20 @@
+# Targets branching
 parallel: FALSE
-single_well: TRUE
+
+# Scope
+single_well: FALSE
+single_well_site: 1
+
+# Testing and Resampling
 initial_prop: 0.9
 cv_initial: 2000
 cv_assess: 600
 cv_skip: 600
 cv_lag: 365
+
+# Parallel
+allow_par: FALSE
+cores: 6
+
+# Tuning
+hyppar_combinations: 12
