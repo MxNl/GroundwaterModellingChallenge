@@ -7,31 +7,30 @@ targets_preprocessing <- list(
     iteration = "list"
   ),
   tar_target(
-    data_imputed,
+    data_previous_week_predictors,
     data_no_empty_cols %>%
-      mutate(gwl = zoo::na.approx(gwl)),
+      aggregated_predictors(),
     pattern = map(data_no_empty_cols),
     iteration = "list"
   ),
+  # tar_target(
+  #   data_imputed,
+  #   data_no_empty_cols %>%
+  #     mutate(gwl = zoo::na.approx(gwl)),
+  #   pattern = map(data_no_empty_cols),
+  #   iteration = "list"
+  # ),
   tar_target(
     data_modelling,
-    data_imputed %>%
-      filter(date >= split_dates %>%
-        pull(train_start) %>%
-        lubridate::as_date()) %>%
-      filter(date <= split_dates %>%
-        pull(train_end) %>%
-        lubridate::as_date()),
-    pattern = map(data_imputed, split_dates),
+    slice_modelling_period(data_previous_week_predictors, split_dates),
+    pattern = map(data_previous_week_predictors, split_dates),
     iteration = "list"
   ),
   tar_target(
     data_prediction,
-    data_imputed %>%
-      filter(date > split_dates %>%
-        pull(train_end) %>%
-        lubridate::as_date()),
-    pattern = map(data_imputed, split_dates),
+    data_previous_week_predictors %>%
+      filter(date > split_dates$train_end),
+    pattern = map(data_previous_week_predictors, split_dates),
     iteration = "list"
   )
 )

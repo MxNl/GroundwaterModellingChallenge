@@ -26,6 +26,7 @@ targets_import <- list(
     tar_target(
       split_dates,
       SPLIT_DATES %>%
+        mutate(across(starts_with("train_"), as_date)) %>%
         slice_by_wellid(SINGLE_WELL_SITE) %>%
         group_by(well_id) %>%
         group_split(),
@@ -36,6 +37,7 @@ targets_import <- list(
     tar_target(
       split_dates,
       SPLIT_DATES %>%
+        mutate(across(starts_with("train_"), as_date)) %>%
         group_by(well_id) %>%
         group_split(),
       iteration = "list"

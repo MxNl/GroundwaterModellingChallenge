@@ -1,5 +1,5 @@
 make_resampling <- function(x) {
-  x |> 
+  x |>
     timetk::time_series_cv(
       date,
       initial = CV_INITIAL,
@@ -10,48 +10,98 @@ make_resampling <- function(x) {
     )
 }
 
+summarise_by_week <- function(x) {
+  x %>%
+    summarise_by_time(.date_var = date, .by = "week")
+}
+
 make_recipe <- function(x) {
-  well_id <- x |> 
-    slice(1) |> 
+  well_id <- x |>
+    slice(1) |>
     pull(well_id)
-  
+
   locale_set <- case_when(
     well_id == "Germany" ~ "DE",
     TRUE ~ "World"
   )
-  
-  recipe(gwl ~ ., data = x) |> 
+
+  recipe(gwl ~ ., data = x) |>
+    step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) %>%
     step_normalize(all_numeric_predictors()) |>
-    update_role(well_id, new_role = "id") |> 
-    step_lag(all_numeric_predictors(), lag = 1:5) |> 
-    step_naomit() |> 
-    # timetk::step_timeseries_signature(date) |> 
-    step_rm(date, well_id)
-    # step_rm(date, well_id, all_of(c("date_month.lbl", "date_wday.lbl")))
-    # timetk::step_holiday_signature(date, locale_set = locale_set)
+      update_role(well_id, new_role = "id") |>
+    # step_mutate_at(all_numeric_predictors(), fn = summarise_by_week) %>%
+    step_lag(contains("previous_week"), lag = 1:5) |>
+      timetk::step_ts_clean(all_numeric()) %>%
+      step_naomit() |>
+      timetk::step_timeseries_signature(date) |>
+      step_rm(well_id) %>%
+      step_pca(all_numeric_predictors())
+  # step_rm(date, well_id, all_of(c("date_month.lbl", "date_wday.lbl")))
+  # timetk::step_holiday_signature(date, locale_set = locale_set)
 }
 
 make_tune_grid_xgboost <- function() {
   grid_regular(
     learn_rate(),
     tree_depth(),
-    levels = 5
+    loss_reduction(),
+    levels = 8
   )
 }
 
 make_model_grid_xgboost <- function(tune_grid) {
-  tune_grid |> 
+  tune_grid |>
     create_model_grid(
       f_model_spec = boost_tree,
-      engine_name  = "xgboost",
+      engine_name = "xgboost",
       mode = "regression"
     )
+}
+
+make_tune_grid_svm <- function() {
+  grid_regular(
+    rbf_sigma(),
+    levels = 5
+  )
+}
+
+make_model_grid_svm <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = svm_rbf,
+      engine_name = "kernlab",
+      mode = "regression"
+    )
+}
+
+make_tune_grid_prophet <- function() {
+  grid_regular(
+    changepoint_num(),
+    changepoint_range(),
+    seasonality_yearly(),
+    levels = 3
+  )
+}
+
+make_model_grid_prophet <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = prophet_reg,
+      engine_name = "prophet",
+      mode = "regression"
+    )
+}
+
+
+
+make_model_automl <- function() {
+  auto_ml(mode = "regression")
 }
 
 make_workflow_set <- function(recipes, models) {
   workflow_set(
     preproc = recipes,
-    models = models, 
+    models = models,
     cross = TRUE
   )
 }
@@ -61,7 +111,7 @@ fit_models <- function(data, workflow_set) {
     modeltime_fit_workflowset(
       data = data,
       control = control_fit_workflowset(
-        verbose   = TRUE,
+        verbose = TRUE,
         allow_par = ALLOW_PAR,
         cores = 6
       )

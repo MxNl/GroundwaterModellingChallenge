@@ -2,7 +2,7 @@
 parallel: FALSE
 
 # Scope
-single_well: FALSE
+single_well: TRUE
 single_well_site: 1
 
 # Testing and Resampling
@@ -13,7 +13,7 @@ cv_skip: 600
 cv_lag: 365
 
 # Parallel
-allow_par: FALSE
+allow_par: TRUE
 cores: 6
 
 # Tuning

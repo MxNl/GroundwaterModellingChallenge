@@ -30,6 +30,16 @@ targets_modelling <- list(
     pattern = map(initial_split),
     iteration = "list"
   ),
+  #### svm
+  tar_target(
+    tune_grid_svm,
+    make_tune_grid_svm()
+  ),
+  tar_target(
+    model_grid_svm,
+    make_model_grid_svm(tune_grid_svm)
+  ),
+  #### xgboost
   tar_target(
     tune_grid_xgboost,
     make_tune_grid_xgboost()
@@ -38,11 +48,26 @@ targets_modelling <- list(
     model_grid_xgboost,
     make_model_grid_xgboost(tune_grid_xgboost)
   ),
+  #### prophet
+  tar_target(
+    tune_grid_prophet,
+    make_tune_grid_prophet()
+  ),
+  tar_target(
+    model_grid_prophet,
+    make_model_grid_prophet(tune_grid_prophet)
+  ),
+  #### automl
+  tar_target(
+    model_automl,
+    make_model_automl()
+  ),
+  ###########
   tar_target(
     workflow_set,
     make_workflow_set(
       recipes = list(recipe),
-      models = model_grid_xgboost$.models
+      models = c(model_grid_prophet$.models)
     ),
     pattern = map(recipe),
     iteration = "list"

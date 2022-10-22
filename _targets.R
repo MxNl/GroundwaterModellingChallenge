@@ -8,6 +8,7 @@ options(tidyverse.quiet = TRUE)
 tar_option_set(
   packages = c(
     "janitor",
+    "lubridate",
     "httr",
     "data.table",
     "modeltime.gluonts",
