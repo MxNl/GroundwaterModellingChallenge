@@ -23,10 +23,26 @@ targets_modelling <- list(
     iteration = "list"
   ),
   tar_target(
+    recipe_basic,
+    initial_split |>
+      training() |>
+      make_recipe_basic(),
+    pattern = map(initial_split),
+    iteration = "list"
+  ),
+  tar_target(
     recipe,
     initial_split |>
       training() |>
       make_recipe(),
+    pattern = map(initial_split),
+    iteration = "list"
+  ),
+  tar_target(
+    recipe_1,
+    initial_split |>
+      training() |>
+      make_recipe_1(),
     pattern = map(initial_split),
     iteration = "list"
   ),
@@ -66,10 +82,10 @@ targets_modelling <- list(
   tar_target(
     workflow_set,
     make_workflow_set(
-      recipes = list(recipe),
+      recipes = list(recipe_basic, recipe, recipe_1),
       models = c(model_grid_prophet$.models)
     ),
-    pattern = map(recipe),
+    pattern = map(recipe_basic, recipe, recipe_1),
     iteration = "list"
   ),
   tar_target(

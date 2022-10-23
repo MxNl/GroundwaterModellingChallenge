@@ -16,28 +16,44 @@ summarise_by_week <- function(x) {
 }
 
 make_recipe <- function(x) {
-  well_id <- x |>
-    slice(1) |>
-    pull(well_id)
-
-  locale_set <- case_when(
-    well_id == "Germany" ~ "DE",
-    TRUE ~ "World"
-  )
-
   recipe(gwl ~ ., data = x) |>
     step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) %>%
     step_normalize(all_numeric_predictors()) |>
-      update_role(well_id, new_role = "id") |>
-    # step_mutate_at(all_numeric_predictors(), fn = summarise_by_week) %>%
+    update_role(well_id, new_role = "id") |>
     step_lag(contains("previous_week"), lag = 1:5) |>
-      timetk::step_ts_clean(all_numeric()) %>%
-      step_naomit() |>
-      timetk::step_timeseries_signature(date) |>
-      step_rm(well_id) %>%
-      step_pca(all_numeric_predictors())
-  # step_rm(date, well_id, all_of(c("date_month.lbl", "date_wday.lbl")))
-  # timetk::step_holiday_signature(date, locale_set = locale_set)
+    timetk::step_ts_clean(all_numeric()) %>%
+    timetk::step_timeseries_signature(date) |>
+    step_rm(well_id) %>%
+    step_pca(all_numeric_predictors()) |> 
+    recipes::step_zv(all_predictors())
+}
+
+make_recipe_basic <- function(x) {
+  recipe(gwl ~ tg + rr, data = x) |>
+    step_normalize(all_numeric_predictors())
+}
+
+make_recipe_1 <- function(x) {
+  # well_id <- x |>
+  #   slice(1) |>
+  #   pull(well_id)
+  # 
+  # locale_set <- case_when(
+  #   well_id == "Germany" ~ "DE",
+  #   TRUE ~ "World"
+  # )
+
+  recipe(gwl ~ ., data = x) |>
+    # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) %>%
+    step_normalize(all_numeric_predictors()) |>
+    update_role(well_id, new_role = "id") |>
+    step_lag(contains("previous_week"), lag = 1:5) |>
+    timetk::step_ts_clean(all_numeric()) %>%
+    timetk::step_timeseries_signature(date) |>
+    step_rm(well_id) |> 
+    recipes::step_zv(all_predictors()) |> 
+    recipes::step_date(date, features = c("month", "quarter")) |> 
+    recipes::step_dummy(recipes::all_nominal_predictors(), one_hot = TRUE)
 }
 
 make_tune_grid_xgboost <- function() {
