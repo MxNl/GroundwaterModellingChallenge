@@ -2,6 +2,7 @@
 YML_CONFIG <- yaml::read_yaml('config.yml')
 
 PARALLEL <- purrr::chuck(YML_CONFIG, "parallel")
+CORES <- purrr::chuck(YML_CONFIG, "cores")
 PATH_GITHUB_GROUNDWATERCHALLENGE <- "https://api.github.com/repos/gwmodeling/challenge/git/trees/main?recursive=1"
 PATH_GITHUB_REPO <- "https://github.com/gwmodeling/challenge/"
 SPLIT_DATES <- tibble::tribble(

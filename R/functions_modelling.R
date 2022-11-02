@@ -15,22 +15,22 @@ summarise_by_week <- function(x) {
     summarise_by_time(.date_var = date, .by = "week")
 }
 
+make_recipe_basic <- function(x) {
+  recipe(gwl ~ tg + rr + date, data = x) |>
+    step_normalize(all_numeric_predictors())
+}
+
 make_recipe <- function(x) {
   recipe(gwl ~ ., data = x) |>
-    step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) %>%
+    step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
     step_normalize(all_numeric_predictors()) |>
     update_role(well_id, new_role = "id") |>
     step_lag(contains("previous_week"), lag = 1:5) |>
-    timetk::step_ts_clean(all_numeric()) %>%
+    timetk::step_ts_clean(all_numeric()) |>
     timetk::step_timeseries_signature(date) |>
-    step_rm(well_id) %>%
-    step_pca(all_numeric_predictors()) |> 
+    step_rm(well_id) |>
+    step_pca(all_numeric_predictors()) |>
     recipes::step_zv(all_predictors())
-}
-
-make_recipe_basic <- function(x) {
-  recipe(gwl ~ tg + rr, data = x) |>
-    step_normalize(all_numeric_predictors())
 }
 
 make_recipe_1 <- function(x) {
@@ -44,15 +44,15 @@ make_recipe_1 <- function(x) {
   # )
 
   recipe(gwl ~ ., data = x) |>
-    # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) %>%
-    step_normalize(all_numeric_predictors()) |>
-    update_role(well_id, new_role = "id") |>
-    step_lag(contains("previous_week"), lag = 1:5) |>
-    timetk::step_ts_clean(all_numeric()) %>%
-    timetk::step_timeseries_signature(date) |>
-    step_rm(well_id) |> 
-    recipes::step_zv(all_predictors()) |> 
-    recipes::step_date(date, features = c("month", "quarter")) |> 
+    # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
+    recipes::step_normalize(recipes::all_numeric_predictors()) |>
+    recipes::step_lag(dplyr::contains("previous_week"), lag = 1:5) |>
+    timetk::step_ts_clean(recipes::all_numeric()) |>
+    # timetk::step_timeseries_signature(date) |>
+    recipes::step_rm(well_id) |>
+    recipes::step_zv(recipes::all_predictors()) |>
+    recipes::step_date(date, features = c("month", "quarter")) |>
+    # embed::step_embed(recipes::all_nominal_predictors())
     recipes::step_dummy(recipes::all_nominal_predictors(), one_hot = TRUE)
 }
 
@@ -109,7 +109,6 @@ make_model_grid_prophet <- function(tune_grid) {
 }
 
 
-
 make_model_automl <- function() {
   auto_ml(mode = "regression")
 }
@@ -123,13 +122,13 @@ make_workflow_set <- function(recipes, models) {
 }
 
 fit_models <- function(data, workflow_set) {
-  workflow_set %>%
+  workflow_set |>
     modeltime_fit_workflowset(
       data = data,
       control = control_fit_workflowset(
         verbose = TRUE,
-        allow_par = ALLOW_PAR,
-        cores = 6
+        allow_par = ALLOW_PAR
+        # cores = CORES
       )
     )
 }
