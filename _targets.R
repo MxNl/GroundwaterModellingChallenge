@@ -1,4 +1,5 @@
 library(targets)
+library(agua)
 # library(modeltime.gluonts)
 library(tarchetypes)
 library(renv)
@@ -15,7 +16,10 @@ tar_option_set(
     "rlang",
     "modeltime.gluonts",
     "modeltime",
+    "agua",
+    "workflowsets",
     "tidymodels",
+    "stacks",
     "tidyverse"
     ),
   memory = "transient",

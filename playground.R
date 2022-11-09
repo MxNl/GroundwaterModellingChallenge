@@ -26,3 +26,58 @@ m750 %>%
     )
 
 m750 %>% pull(date) %>% range()
+
+
+tar_read(best_performance_cl)
+
+tar_read(best_workflow_cl) |> 
+  chuck(1) |> 
+  collect_predictions() |>
+  # nse(gwl, .pred)
+  pivot_longer(cols = all_of(c("gwl", ".pred"))) |> 
+  ggplot(aes(.row, value, colour = name)) +
+  geom_line()
+
+
+
+tar_read(best_workflow_cl) |> 
+  chuck(1) |> 
+  collect_predictions() |>
+  # nse(gwl, .pred)
+  ggplot(aes(gwl, .pred)) +
+  geom_point() +
+  coord_equal()
+
+fitted_models_cl <- tar_read(fitted_models_cl) |> chuck(1)
+test <- stacks::stacks() |> 
+  stacks::add_candidates(tar_read(best_performance_cl) |> chuck(1))
+
+
+test_blend <- test |> 
+  stacks::blend_predictions()
+
+test_blend |> autoplot()
+
+
+rnorm(100) |> 
+  c(seq(1.5, 2.5, 0.01)) |> 
+  as_tibble() |> 
+  ggplot(aes(sample = value)) +
+  stat_qq() +
+  stat_qq_line()
+
+tar_read(best_performance_cl) |> 
+  chuck(1) |> 
+  filter(.metric == "rsq") |> 
+  group_by(model) |> 
+  slice_head(n = 2)
+
+tar_read(predictions_ensemble) |> 
+  chuck(1) |> 
+  nse(gwl, .pred)
+
+tar_read(predictions_ensemble) |> 
+  chuck(1) |> 
+  pivot_longer(cols = all_of(c("gwl", ".pred"))) |> 
+  ggplot(aes(date, value, colour = name)) +
+  geom_line()

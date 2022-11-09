@@ -133,6 +133,16 @@
         "Rcpp"
       ]
     },
+    "RcppTOML": {
+      "Package": "RcppTOML",
+      "Version": "0.1.7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f8a578aa91321ecec1292f1e2ffadeda",
+      "Requirements": [
+        "Rcpp"
+      ]
+    },
     "SQUAREM": {
       "Package": "SQUAREM",
       "Version": "2021.1",
@@ -918,6 +928,16 @@
         "vctrs"
       ]
     },
+    "here": {
+      "Package": "here",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "24b224366f9c2e7534d2344d10d59211",
+      "Requirements": [
+        "rprojroot"
+      ]
+    },
     "highr": {
       "Package": "highr",
       "Version": "0.9",
@@ -1342,6 +1362,36 @@
         "yardstick"
       ]
     },
+    "modeltime.gluonts": {
+      "Package": "modeltime.gluonts",
+      "Version": "0.3.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "business-science",
+      "RemoteRepo": "modeltime.gluonts",
+      "RemoteRef": "master",
+      "RemoteSha": "f4eec5f0b6497b4d4da6e72aa90453d67ec2b80f",
+      "Hash": "2c66b711f4baf0cecbff51f5c3397982",
+      "Requirements": [
+        "cli",
+        "dials",
+        "dplyr",
+        "forcats",
+        "fs",
+        "glue",
+        "magrittr",
+        "modeltime",
+        "parsnip",
+        "purrr",
+        "reticulate",
+        "rlang",
+        "stringr",
+        "tibble",
+        "tidyr",
+        "timetk"
+      ]
+    },
     "munsell": {
       "Package": "munsell",
       "Version": "0.5.0",
@@ -1516,6 +1566,14 @@
         "vctrs",
         "viridisLite"
       ]
+    },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "03b7076c234cb3331288919983326c55",
+      "Requirements": []
     },
     "prettyunits": {
       "Package": "prettyunits",
@@ -1788,6 +1846,23 @@
         "rlang",
         "rmarkdown",
         "rstudioapi",
+        "withr"
+      ]
+    },
+    "reticulate": {
+      "Package": "reticulate",
+      "Version": "1.26",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "91c176c84a2e3558572d2cbaddc08bd4",
+      "Requirements": [
+        "Matrix",
+        "Rcpp",
+        "RcppTOML",
+        "here",
+        "jsonlite",
+        "png",
+        "rappdirs",
         "withr"
       ]
     },

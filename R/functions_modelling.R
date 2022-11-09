@@ -130,7 +130,11 @@ make_model_grid_nnetar <- function(tune_grid) {
 }
 
 make_model_automl <- function() {
-  auto_ml(mode = "regression")
+  # agua::h2o_start()
+  
+  auto_ml() %>%
+    set_engine("h2o", max_runtime_secs = 120, seed = 1) %>%
+    set_mode("regression")
 }
 
 make_workflow_set <- function(recipes, models) {
@@ -210,7 +214,8 @@ tune_resampling <- function(object, resamples) {
     object,
     fn = "fit_resamples",
     resamples = resamples,
-    metrics = metrics_set
+    metrics = metrics_set,
+    control = stacks::control_stack_resamples()
   )
   
   if(ALLOW_PAR) parallel::stopCluster(cl)
@@ -233,4 +238,22 @@ fit_best_model <- function(workflowset, ranked_performances, split) {
   workflowset |> 
     extract_workflow(id_best_model) |>
     last_fit(split, metrics = metrics_set)
+}
+
+fit_model_ensemble <- function(model_ensemble) {
+  
+  model_ensemble |> 
+    fit_members()
+}
+
+
+select_best_models <- function(x, y) {
+  best_models_wflow_ids <- x |> 
+    filter(.metric == "rsq") |> 
+    group_by(model) |> 
+    slice_head(n = 2) |> 
+    pull(wflow_id)
+  
+  y |> 
+    filter(wflow_id %in% best_models_wflow_ids)
 }

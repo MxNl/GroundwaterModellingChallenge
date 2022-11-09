@@ -91,7 +91,7 @@ targets_modelling_setup <- list(
   #### automl
   tar_target(
     model_automl,
-    make_model_automl()
+    make_model_automl(),
   ),
 
   # Workflow ----------------------------------------------------------------
@@ -100,16 +100,18 @@ targets_modelling_setup <- list(
     workflow_set,
     make_workflow_set(
       recipes = list(
-        recipe_pure,
+        recipe_lag_pca_zv_dateext,
         recipe_pure_but_all_standard_predictors
       ),
       models = c(
+        # model_automl
+        # model_grid_xgboost$.models
         model_grid_prophet$.models,
         model_grid_nnetar$.models
       )
     ),
     pattern = map(
-      recipe_pure,
+      recipe_lag_pca_zv_dateext,
       recipe_pure_but_all_standard_predictors
     ),
     iteration = "list"
