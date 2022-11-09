@@ -1,4 +1,4 @@
-targets_modelling <- list(
+targets_modelling_setup <- list(
   tar_target(
     initial_split,
     data_modelling |>
@@ -22,30 +22,36 @@ targets_modelling <- list(
     pattern = map(resampling),
     iteration = "list"
   ),
+
+  # Recipes -----------------------------------------------------------------
+
   tar_target(
-    recipe_basic,
+    recipe_pure,
     initial_split |>
       training() |>
-      make_recipe_basic(),
+      make_recipe_pure(),
     pattern = map(initial_split),
     iteration = "list"
   ),
   tar_target(
-    recipe,
+    recipe_pure_but_all_standard_predictors,
     initial_split |>
       training() |>
-      make_recipe(),
+      make_recipe_pure_but_all_standard_predictors(),
     pattern = map(initial_split),
     iteration = "list"
   ),
   tar_target(
-    recipe_1,
+    recipe_lag_pca_zv_dateext,
     initial_split |>
       training() |>
-      make_recipe_1(),
+      make_recipe_recipe_lag_pca_zv_dateext(),
     pattern = map(initial_split),
     iteration = "list"
   ),
+
+  # Model Definitions -------------------------------------------------------
+
   #### svm
   tar_target(
     tune_grid_svm,
@@ -73,59 +79,39 @@ targets_modelling <- list(
     model_grid_prophet,
     make_model_grid_prophet(tune_grid_prophet)
   ),
+  #### NNetar
+  tar_target(
+    tune_grid_nnetar,
+    make_tune_grid_nnetar()
+  ),
+  tar_target(
+    model_grid_nnetar,
+    make_model_grid_nnetar(tune_grid_nnetar)
+  ),
   #### automl
   tar_target(
     model_automl,
     make_model_automl()
   ),
-  ###########
+
+  # Workflow ----------------------------------------------------------------
+
   tar_target(
     workflow_set,
     make_workflow_set(
-      recipes = list(recipe_basic, recipe, recipe_1),
-      models = c(model_grid_prophet$.models)
-    ),
-    pattern = map(recipe_basic, recipe, recipe_1),
-    iteration = "list"
-  ),
-  tar_target(
-    fitted_models,
-    fit_models(
-      training(initial_split),
-      workflow_set
-    ),
-    pattern = map(initial_split, workflow_set),
-    iteration = "list"
-  ),
-  tar_target(
-    predicted_test_split,
-    modeltime_calibrate(
-      fitted_models,
-      testing(initial_split)
-    ),
-    pattern = map(fitted_models, initial_split),
-    iteration = "list"
-  ),
-  tar_target(
-    model_accuracy,
-    modeltime_accuracy(predicted_test_split) |>
-      table_modeltime_accuracy(.interactive = FALSE),
-    pattern = map(predicted_test_split),
-    iteration = "list"
-  ),
-  tar_target(
-    plot_model_accuracy,
-    fitted_models |>
-      modeltime_forecast(
-        new_data    = testing(initial_split),
-        actual_data = data_modelling,
-        keep_data   = TRUE
-      ) %>%
-      plot_modeltime_forecast(
-        .facet_ncol  = 3,
-        .interactive = TRUE
+      recipes = list(
+        recipe_pure,
+        recipe_pure_but_all_standard_predictors
       ),
-    pattern = map(fitted_models, initial_split, data_modelling),
+      models = c(
+        model_grid_prophet$.models,
+        model_grid_nnetar$.models
+      )
+    ),
+    pattern = map(
+      recipe_pure,
+      recipe_pure_but_all_standard_predictors
+    ),
     iteration = "list"
   )
 )

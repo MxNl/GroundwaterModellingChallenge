@@ -11,6 +11,8 @@ tar_option_set(
     "lubridate",
     "httr",
     "data.table",
+    "doParallel",
+    "rlang",
     "modeltime.gluonts",
     "modeltime",
     "tidymodels",
@@ -45,5 +47,7 @@ if(PARALLEL) plan(multisession)
 c(
   targets_import,
   targets_preprocessing,
-  targets_modelling
+  targets_modelling_setup,
+  targets_modelling_cl
+  # targets_modelling_mt
 )

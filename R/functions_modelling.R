@@ -15,25 +15,25 @@ summarise_by_week <- function(x) {
     summarise_by_time(.date_var = date, .by = "week")
 }
 
-make_recipe_basic <- function(x) {
+make_recipe_pure <- function(x) {
   recipe(gwl ~ tg + rr + date, data = x) |>
     step_normalize(all_numeric_predictors())
 }
 
-make_recipe <- function(x) {
+make_recipe_pure_but_all_standard_predictors <- function(x) {
   recipe(gwl ~ ., data = x) |>
-    step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
+    # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
     step_normalize(all_numeric_predictors()) |>
-    update_role(well_id, new_role = "id") |>
-    step_lag(contains("previous_week"), lag = 1:5) |>
-    timetk::step_ts_clean(all_numeric()) |>
-    timetk::step_timeseries_signature(date) |>
-    step_rm(well_id) |>
-    step_pca(all_numeric_predictors()) |>
-    recipes::step_zv(all_predictors())
+    update_role(well_id, new_role = "id")
+    # step_lag(contains("previous_week"), lag = 1:5) |>
+    # timetk::step_ts_clean(all_numeric()) |>
+    # timetk::step_timeseries_signature(date) |>
+    # step_rm(well_id) |>
+    # step_pca(all_numeric_predictors()) |>
+    # recipes::step_zv(all_predictors())
 }
 
-make_recipe_1 <- function(x) {
+make_recipe_recipe_lag_pca_zv_dateext <- function(x) {
   # well_id <- x |>
   #   slice(1) |>
   #   pull(well_id)
@@ -53,7 +53,8 @@ make_recipe_1 <- function(x) {
     recipes::step_zv(recipes::all_predictors()) |>
     recipes::step_date(date, features = c("month", "quarter")) |>
     # embed::step_embed(recipes::all_nominal_predictors())
-    recipes::step_dummy(recipes::all_nominal_predictors(), one_hot = TRUE)
+    recipes::step_dummy(recipes::all_nominal_predictors(), one_hot = TRUE) |> 
+    step_pca(all_predictors())
 }
 
 make_tune_grid_xgboost <- function() {
@@ -95,7 +96,7 @@ make_tune_grid_prophet <- function() {
     changepoint_num(),
     changepoint_range(),
     seasonality_yearly(),
-    levels = 3
+    levels = HYPPAR_LEVELS
   )
 }
 
@@ -108,6 +109,25 @@ make_model_grid_prophet <- function(tune_grid) {
     )
 }
 
+make_tune_grid_nnetar <- function() {
+  grid_regular(
+    # non_seasonal_ar(range = c(1L, 5L)),
+    # seasonal_ar(range = c(1L, 5L)),
+    hidden_units(),
+    penalty(),
+    epochs(),
+    levels = HYPPAR_LEVELS
+  )
+}
+
+make_model_grid_nnetar <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = nnetar_reg,
+      engine_name = "nnetar",
+      mode = "regression"
+    )
+}
 
 make_model_automl <- function() {
   auto_ml(mode = "regression")
@@ -122,13 +142,95 @@ make_workflow_set <- function(recipes, models) {
 }
 
 fit_models <- function(data, workflow_set) {
-  workflow_set |>
+  if(ALLOW_PAR) parallel_start(CORES, .method = "parallel")
+
+  fitted_models <- workflow_set |>
     modeltime_fit_workflowset(
       data = data,
       control = control_fit_workflowset(
         verbose = TRUE,
         allow_par = ALLOW_PAR
-        # cores = CORES
       )
     )
+
+  if(ALLOW_PAR) parallel_stop()
+  
+  return(fitted_models)
+}
+
+nse_vec <- function(truth, estimate, na_rm = TRUE, ...) {
+  
+  nse_impl <- function(truth, estimate) {
+    1 - (sum((truth - estimate) ^ 2) / sum((truth - mean(truth)) ^ 2))
+  }
+  
+  metric_vec_template(
+    metric_impl = nse_impl,
+    truth = truth, 
+    estimate = estimate,
+    na_rm = na_rm,
+    cls = "numeric",
+    ...
+  )
+  
+}
+
+nse <- function(data, ...) {
+  UseMethod("nse")
+}
+
+nse <- yardstick::new_numeric_metric(nse, direction = "maximize")
+
+nse.data.frame <- function(data, truth, estimate, na_rm = TRUE, ...) {
+  
+  metric_summarizer(
+    metric_nm = "nse",
+    metric_fn = nse_vec,
+    data = data,
+    truth = !! enquo(truth),
+    estimate = !! enquo(estimate), 
+    na_rm = na_rm,
+    ...
+  )
+}
+
+tune_resampling <- function(object, resamples) {
+  
+  if(ALLOW_PAR) {
+    cl <- parallel::makePSOCKcluster(CORES)
+    parallel::clusterExport(cl, varlist = ls(pattern = "nse"))
+    doParallel::registerDoParallel(cl)
+    
+    metrics_set <- metric_set(rmse, mae, mase, rsq)
+  } else {
+    metrics_set <- metric_set(rmse, mae, mase, rsq, nse)
+  }
+  
+  result <- workflow_map(
+    object,
+    fn = "fit_resamples",
+    resamples = resamples,
+    metrics = metrics_set
+  )
+  
+  if(ALLOW_PAR) parallel::stopCluster(cl)
+  
+  return(result)
+}
+
+fit_best_model <- function(workflowset, ranked_performances, split) {
+  
+  if(ALLOW_PAR) {
+    metrics_set <- metric_set(rmse, mae, mase, rsq)
+  } else {
+    metrics_set <- metric_set(rmse, mae, mase, rsq, nse)
+  }
+  
+  id_best_model <- ranked_performances |> 
+    slice(1) |> 
+    pull(wflow_id)
+  
+  workflowset |> 
+    extract_workflow(id_best_model) |>
+    last_fit(split, metrics = metrics_set)
 }

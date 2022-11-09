@@ -1,196 +1,98 @@
-name|type|data|command|depend|seed|path|time|size|bytes|format|iteration|parent|children|seconds|warnings|error
-test_ce803bae|branch|73680c5850b264fd|cdaa449074cd8e9e|3d683625ae18d2ca|-1423986305||t19272.4749123389s|9e6e8a5125b85db5|326903|rds|list|test||11.88|Paket forcats wurde unter R Version 4.1.3 erstellt|
-test_9c470e51|branch|ce36710cc588871b|cdaa449074cd8e9e|805fe9e664531ae0|695955994||t19272.4749175126s|f8d5c920002e4ed0|327814|rds|list|test||0||
-test_bfd68b7c|branch|b3de2576be690295|cdaa449074cd8e9e|24b356397dec900a|203771283||t19272.4749225241s|af723725a7e81ea4|325992|rds|list|test||0||
-test_03133730|branch|a85e41dd019ee2c8|cdaa449074cd8e9e|8f415a2698cbf668|1925882931||t19272.4749274663s|69e5b5ee6731115e|322840|rds|list|test||0||
-test_bf21e831|branch|f839bb0af4f3e7ce|cdaa449074cd8e9e|18bdcb26fe9d3f71|666651701||t19272.4749319802s|857d20e6e1581d23|177448|rds|list|test||0.02||
-test|pattern|56311c4efbdf9533|cdaa449074cd8e9e||1064684737||||1480997|rds|list||test_ce803bae*test_9c470e51*test_bfd68b7c*test_03133730*test_bf21e831|11.9||
-data_no_empty_cols_4837bb13|branch||d0f144b16e2f366a|011b9d802553e33a|-627108221||t19272.4924170153s||0|rds|list|data_no_empty_cols||11.86|Paket forcats wurde unter R Version 4.1.3 erstellt|x muss ein Array mit mindestens zwei Dimensionen sein
-data_no_empty_cols_ce803bae|branch|e89b17d92a05a40a|d0f144b16e2f366a|f2ba08449a46d54d|584979021||t19272.495964342s|7b2163c77f0bc410|324752|rds|list|data_no_empty_cols||11.87|Paket forcats wurde unter R Version 4.1.3 erstellt|
-data_modelling_3859ab33|branch|82928bd07587961d|1b200eba11c772de|0d3f1a96af752e66|985461301||t19272.533978537s|19322aba914be58e|156043|rds|list|data_modelling||11.83|Paket forcats wurde unter R Version 4.1.3 erstellt|
-data_prediction_3859ab33|branch|8591e2ea0976413b|82a06b851aed21e3|756e2c60fdc78bcf|1855489310||t19272.5339873102s|6083d36330285790|54480|rds|list|data_prediction||0.03||
-data_no_empty_cols_ac9cb2a5|branch|d933013a2a672cf2|d0f144b16e2f366a|9badb7f33c8bea32|-885193904||t19279.4313096309s|4b1e82e910e7484b|324750|rds|list|data_no_empty_cols||0.002||
-data_modelling_9503b701|branch|c0e3123e5cf13e70|1b200eba11c772de|01d415049b0fd20b|316862982||t19279.4313183228s|9c78aebc38f35ead|156042|rds|list|data_modelling||0.035||
-data_prediction_9503b701|branch|2df398302e43a1f9|82a06b851aed21e3|9562080983bd6adc|-136136136||t19279.4313264753s|1f84c43fab5fa4b4|54479|rds|list|data_prediction||0.018||
-data_no_empty_cols_1702f254|branch|93b52e6c361d4ab1|d0f144b16e2f366a|b1f7167a26e8bd74|-352191283||t19279.5317477782s|1d95cddee6c5ab76|324739|rds|list|data_no_empty_cols||0.002||
-data_modelling_d449e666|branch|92af6b8dfa199150|1b200eba11c772de|b527976901cb9f9d|-1734189618||t19279.5317563848s|a498f5e24c550dd4|156030|rds|list|data_modelling||0.035||
-data_prediction_d449e666|branch|997ee5e8b0fb999c|82a06b851aed21e3|430376c61685f3b4|1238510013||t19279.5317647256s|f990bd781599da46|54475|rds|list|data_prediction||0.018||
-initial_split_e0821dc8|branch|616d4e6c493b0a0d|6f130856d9ef7197|6ac0ab7458f59893|170921628||t19279.572112879s|42fbee5dabb3e292|156211|rds|list|initial_split||7.773||
-resampling_71b8b842|branch|edcecb6d21ca1502|7f72964fef4e84c1|3e938815e267c158|1446002481||t19279.5721438336s|9d83ae31afc08c21|565729|rds|list|resampling||1.866||
-recipe_bd01258d|branch||3eb4658a9c6101cb|18a0c7392a691004|-1845038251||t19279.5721521708s||0|rds|list|recipe||7.398||x should be an rsplit object
-plot_resamplingstrategy_bd01258d|branch|b766ea5f43084ac0|aeff7cf582cbbe4b|50df2ede971d43eb|-389338760||t19279.5917120476s|f67e6d5581137541|4352707|rds|list|plot_resamplingstrategy||0.073||
-fitted_models_e4c32c49|branch||e3f8df67a0ff2922|2213679c659deca0|-2132217566||t19279.9196832694s||0|rds|list|fitted_models||39.466||x should be an rsplit object
-plot_model_accuracy_00ac30c7|branch||ad4072cde1a99ab0|e11c1addf04c30ce|1708910068||t19279.960628674s||0|rds|list|plot_model_accuracy||7.564||argument object is missing, with no default
-recipe_71b8b842|branch|a048f80bd909a4e7|c0d6061bff468181|a9b7ed2919720459|1570359219||t19279.9697082016s|58d37917de74ea31|284650|rds|list|recipe||7.509||
-workflow_set_9d07d45c|branch|950617ec0ef8d0ee|a8ab3857a008dcaf|7f2faf910fac3e86|1661974957||t19280.0014480993s|007ee0af6c688f40|3729594|rds|list|workflow_set||0.062||
-fitted_models_d615c0f3|branch|86057f28d9f60abf|e3f8df67a0ff2922|9235630d4d167744|-1478637632||t19280.0016013039s|9f85788f02ddbcb1|28715256|rds|list|fitted_models||9.586||
-predicted_test_split_0052bee1|branch|963beedd80ed6f59|5f5c80c718ef285b|889e01ef4f4a801c|-1147028621||t19280.0017303224s|1031197d7f26e5d9|28740631|rds|list|predicted_test_split||7.529||
-plot_model_accuracy_1cc2cbf7|branch|5927c7b6233ba6be|3397c2d7ddb6a095|b02f35a9c3efe17e|-2089029240||t19280.0018575717s|10cbacbf115b75e5|33613028|rds|list|plot_model_accuracy||5.859|Expecting the following names to be in the data frame .conf_hi, .conf_lo. Proceeding with .conf_interval_show  FALSE to visualize the forecast without confidence intervals.Alternatively, try using modeltime_calibrate before forecasting to add confidence intervals.|
-model_accuracy_0a07e73b|branch|332d9f97d805fe5b|147db908d303d448|e232d6e89796d6c3|998185610||t19280.0018803266s|ffde93a25247fae1|2856|rds|list|model_accuracy||0.809|A correlation computation is required, but estimate is constant and has 0 standard deviation, resulting in a divide by 0 error. NA will be returned.|
-data_no_empty_cols_1a7fdb29|branch|66ae330fa3b0b6cf|d0f144b16e2f366a|79c0f7e638366a0f|-466923082||t19280.0059067506s|01c7a555dc4debbe|325653|rds|list|data_no_empty_cols||0.003||
-data_no_empty_cols_cf3dc5e3|branch|b9af54239921a4a0|d0f144b16e2f366a|32fdefe4a5ee7c97|31822542||t19280.0059106622s|feebee03aeb8fce8|323844|rds|list|data_no_empty_cols||0.001||
-data_no_empty_cols_99dfcfb9|branch|d9aefd763c255810|d0f144b16e2f366a|a9de9fb77ef6da62|476625326||t19280.0059145544s|b6784d81f1e3ff1a|320686|rds|list|data_no_empty_cols||0.001||
-data_no_empty_cols_dd991c40|branch|251094954ed6c235|d0f144b16e2f366a|80862c89f3332266|-1808327||t19280.0059179977s|d343ff8a3e7d210b|175352|rds|list|data_no_empty_cols||0.001||
-data_modelling_1c5ebdba|branch|c95f2b811eb82a64|1b200eba11c772de|a2acf23f14b267b2|363587614||t19280.0059268241s|74032517a899a12f|166777|rds|list|data_modelling||0.041||
-data_modelling_9ba5a675|branch|8e5b90df38053ea9|1b200eba11c772de|4adf772f17009df2|613649745||t19280.0059303511s|2792d7163811382e|157047|rds|list|data_modelling||0.035||
-data_modelling_e8a4c646|branch|f8f579f3844bfa0d|1b200eba11c772de|88f9098d54c33368|-111896024||t19280.0059339247s|42fbee5dabb3e292|156211|rds|list|data_modelling||0.035||
-data_modelling_65bd907e|branch|013fec9a9b5336d5|1b200eba11c772de|455f633b4c1402d7|-1219484874||t19280.0059372568s|abd6a9a42e185834|108754|rds|list|data_modelling||0.036||
-data_prediction_1c5ebdba|branch|68b72dc19c96f1b3|82a06b851aed21e3|721dc8fdc23cebb8|1528941308||t19280.0059454426s|ff7ec4a9a76f1d7e|67311|rds|list|data_prediction||0.018||
-data_prediction_9ba5a675|branch|9746d571ca309594|82a06b851aed21e3|214d7f614192d1f9|-1799669235||t19280.0059485619s|d529b8c23be5acf4|64794|rds|list|data_prediction||0.018||
-data_prediction_e8a4c646|branch|83c9796e811b7de3|82a06b851aed21e3|ce3b5d044cc345c0|-227393361||t19280.0059516876s|6abecd9551cf98de|62590|rds|list|data_prediction||0.019||
-data_prediction_65bd907e|branch|25a8c7530b255a0c|82a06b851aed21e3|043a62e3de29e6b2|1231484766||t19280.0059547316s|3ff07bd541c3d2f2|36249|rds|list|data_prediction||0.018||
-initial_split_1241be8d|branch|79ba67f6222c5887|6f130856d9ef7197|1da3ab22d554fd2b|1008388566||t19280.0059639892s|538cfd91f6e4ef1c|166963|rds|list|initial_split||0.004||
-initial_split_d6bd9508|branch|c14046f8f53b9fff|6f130856d9ef7197|1d97952778bd6da4|765400668||t19280.0059670321s|e46858d717ef535e|157230|rds|list|initial_split||0.003||
-initial_split_3a626ec5|branch|99db9592c4ec2933|6f130856d9ef7197|d81bd22a89241662|1561052155||t19280.0059700664s|f935bcef013f489c|156391|rds|list|initial_split||0.004||
-initial_split_3bb27f89|branch|eb51b5fb9e9f579d|6f130856d9ef7197|c1212cd25256bef0|-1819067126||t19280.0059729278s|9923854c5f8f2439|108935|rds|list|initial_split||0.003||
-recipe_a3b5a72b|branch|41fb81f3020becd3|c0d6061bff468181|12ef2fc5434fcac8|1208957077||t19280.0059818688s|6b3e6e157671fd8e|301985|rds|list|recipe||0.046||
-recipe_310c2bc2|branch|0e62520a8ae39f25|c0d6061bff468181|f59d13f00a2e9442|768729452||t19280.0059856551s|fd8cdadab549b5f4|284455|rds|list|recipe||0.05||
-recipe_04f425cd|branch|ec1f9d7d1bb581ca|c0d6061bff468181|915fa33d41304021|-2095929332||t19280.0059894127s|d5a58af38d736687|283095|rds|list|recipe||0.042||
-recipe_8c66a2a2|branch|396d99f6a706e4f5|c0d6061bff468181|233bbfe3d667b700|1868027985||t19280.005992884s|5d24da6ed3bc4d57|198716|rds|list|recipe||0.04||
-resampling_a3b5a72b|branch|91f265d5f29fb510|7f72964fef4e84c1|7781f84039094ec4|-1018373357||t19280.0060251575s|638f67d087f11dd4|757493|rds|list|resampling||1.989||
-resampling_310c2bc2|branch|1d2d6ffd1ddb4a9e|7f72964fef4e84c1|0dd5d22e10008947|436296046||t19280.0060503244s|363c56a597deb039|567938|rds|list|resampling||1.838||
-resampling_04f425cd|branch|3ba8486e4cd391a7|7f72964fef4e84c1|521eae03ace578f3|-362963944||t19280.0060762769s|c2d495c69a08ae82|565592|rds|list|resampling||1.909||
-resampling_8c66a2a2|branch|bc06372d8b457c76|7f72964fef4e84c1|7343add85406b884|-422473259||t19280.006100501s|109d7b97dafa71a2|395734|rds|list|resampling||1.8||
-workflow_set_e81558f6|branch|87bc97d9b294c9f9|a8ab3857a008dcaf|a2c399b042c4cd5f|341132665||t19280.0061175319s|7aacc38a9894b78a|3967951|rds|list|workflow_set||0.063||
-workflow_set_b00e9aae|branch|a41613996ae86ff9|a8ab3857a008dcaf|c36753451b0d9454|-753106776||t19280.0061288624s|730d5076d67e76dd|3747428|rds|list|workflow_set||0.059||
-workflow_set_f58a8dfc|branch|23ff7d010094cd01|a8ab3857a008dcaf|aef1e9170f1e4555|677513848||t19280.0061400873s|3f52427a5437fb0d|3721928|rds|list|workflow_set||0.056||
-workflow_set_f4fa28bf|branch|4e06a51d7ccb31aa|a8ab3857a008dcaf|526a8eb43bf2fff8|-2127272209||t19280.0061477471s|5e84fdfd42ffe27c|2605056|rds|list|workflow_set||0.058||
-plot_resamplingstrategy_3fffa471|branch|1239c041ab8cc41c|aeff7cf582cbbe4b|d82049cc89bfcb82|-286087573||t19280.0061707793s|d449da8eff80a8e5|5198607|rds|list|plot_resamplingstrategy||0.073||
-plot_resamplingstrategy_38322149|branch|d0d420206a093568|aeff7cf582cbbe4b|db42a499318a6b2c|590407962||t19280.0061855403s|e720883d3e82dfa0|4311285|rds|list|plot_resamplingstrategy||0.063||
-plot_resamplingstrategy_e7e20fad|branch|170509aa5cffabaf|aeff7cf582cbbe4b|ea97b7f02d18cc84|-1883835836||t19280.0062004423s|6a6289059942340f|4290615|rds|list|plot_resamplingstrategy||0.051||
-plot_resamplingstrategy_8fd4f227|branch|599c80a0de6c3507|aeff7cf582cbbe4b|b0896c63947b757f|1601664853||t19280.0062109077s|a261af3a0a9bc750|3101051|rds|list|plot_resamplingstrategy||0.055||
-fitted_models_16fc7a5d|branch|f2236536ca4cfbef|e3f8df67a0ff2922|011500313168dbba|164452794||t19280.0062875607s|b1e85e08060e9f38|321|rds|list|fitted_models||5.825||
-fitted_models_ab8c74a9|branch|f2236536ca4cfbef|e3f8df67a0ff2922|28b108631684ab19|-2007686940||t19280.0063554178s|b1e85e08060e9f38|321|rds|list|fitted_models||5.501||
-fitted_models_53fc1015|branch|f2236536ca4cfbef|e3f8df67a0ff2922|02332a9420040fb4|417525432||t19280.006425698s|b1e85e08060e9f38|321|rds|list|fitted_models||5.701||
-fitted_models_a9e14e6a|branch|f2236536ca4cfbef|e3f8df67a0ff2922|ab4c2c9b5a413143|-492830007||t19280.0064907749s|b1e85e08060e9f38|321|rds|list|fitted_models||5.282||
-predicted_test_split_395390d0|branch||5f5c80c718ef285b|1603778b894c2843|-385626525||t19280.0065002965s||0|rds|list|predicted_test_split||0.158||All models failed Modeltime Calibration.
-data_imputed_dd8f6b29|branch|7bfb069ea46fa717|c336cb2a2a377c1c|1af535f76fc69e99|-1902516413||t19280.0240417538s|4cf48777e632befb|166397|rds|list|data_imputed||8.183||
-data_modelling_cf09cb05|branch|7bfb069ea46fa717|743d6fbb3827f258|7b86f2d03401ec16|2090690833||t19280.0240510883s|4cf48777e632befb|166397|rds|list|data_modelling||0.041||
-data_prediction_cf09cb05|branch|cb834d769288b0ea|70b3efeb05aaf729|aacc4f3333460178|1858556779||t19280.0240590986s|dd56a5971d025bfa|192|rds|list|data_prediction||0.018||
-initial_split_330dde0e|branch|a29ee819fd875d83|6f130856d9ef7197|4e2d897d79799d8e|-145646017||t19280.0240675764s|17a05964f0b6b883|166581|rds|list|initial_split||0.003||
-recipe_bde1de1f|branch|96ba280dc636f951|c0d6061bff468181|fe961705817bf6a0|-57012416||t19280.0240768249s|dac2c49ffccd1be4|300841|rds|list|recipe||0.047||
-resampling_bde1de1f|branch|b5cb0790a19efa20|7f72964fef4e84c1|a130ffc7e15d26fa|1450157547||t19280.0241091081s|90a25457a226fc90|756135|rds|list|resampling||1.969||
-workflow_set_75cf80bb|branch|868cc6db503f9778|a8ab3857a008dcaf|5dc0655ebd84db95|-1353525265||t19280.0241261282s|ad0ae8aa108c3a19|3955450|rds|list|workflow_set||0.061||
-plot_resamplingstrategy_2a772773|branch|aedada42739eceb4|aeff7cf582cbbe4b|9c0171d2eec57fd2|1452085283||t19280.0241488378s|1b480371452fb2d9|5183011|rds|list|plot_resamplingstrategy||0.071||
-fitted_models_e12adc27|branch|9f63376442ad4e5f|e3f8df67a0ff2922|251f4e8c198e0bfc|1009079715||t19280.0243036869s|7bac6d4a9a47b100|29797721|rds|list|fitted_models||9.789||
-predicted_test_split_47fd77d0|branch|2cc0385625aa55e6|5f5c80c718ef285b|0c2e960e3a860e26|939298948||t19280.0244304016s|8ff93778f325f470|29828217|rds|list|predicted_test_split||7.141||
-plot_model_accuracy_96e61ab7|branch|42d560c9ceb285bd|3397c2d7ddb6a095|519f63a99f8a2348|805092390||t19280.0245631774s|5e141f47550c1e74|34976566|rds|list|plot_model_accuracy||5.867|Expecting the following names to be in the data frame .conf_hi, .conf_lo. Proceeding with .conf_interval_show  FALSE to visualize the forecast without confidence intervals.Alternatively, try using modeltime_calibrate before forecasting to add confidence intervals.|
-model_accuracy_7862f1ae|branch|13761502ae87b715|147db908d303d448|8dcbccd4a14f08f1|1636255387||t19280.0245861386s|5fca491f12676dcd|2836|rds|list|model_accuracy||0.802|A correlation computation is required, but estimate is constant and has 0 standard deviation, resulting in a divide by 0 error. NA will be returned.|
-data_imputed_7a4a5906|branch|93b8198530b235a9|c336cb2a2a377c1c|0f9227560383b13f|1980778483||t19280.0255467521s|7b34806064b7a418|26638|rds|list|data_imputed||0.051||
-data_imputed_92eb9cb6|branch|3846096059f0a919|c336cb2a2a377c1c|d1a7c63b8391bbcb|790678321||t19280.0255501422s|780d38586ed4006b|26803|rds|list|data_imputed||0.044||
-data_imputed_1058c2ab|branch|36e03e7bbc612767|c336cb2a2a377c1c|8769dee398821269|636423754||t19280.0255538517s|d9f0f396a24ba418|108217|rds|list|data_imputed||0.066||
-data_imputed|pattern|028d9f3c6b1a8010|c336cb2a2a377c1c||264694849||||317688|rds|list||data_imputed_18223f92*data_imputed_dd8f6b29*data_imputed_7a4a5906*data_imputed_92eb9cb6*data_imputed_1058c2ab|0.393||
-data_modelling_de792f21|branch|92af6b8dfa199150|743d6fbb3827f258|0baed021509b2792|-1974977076||t19280.0255624249s|a498f5e24c550dd4|156030|rds|list|data_modelling||0.041||
-data_modelling_cbd8a8a6|branch|93b8198530b235a9|743d6fbb3827f258|b958dd6f47a04f54|-279787200||t19280.0255655288s|7b34806064b7a418|26638|rds|list|data_modelling||0.039||
-data_modelling_161ed64e|branch|3846096059f0a919|743d6fbb3827f258|3681c3285d204796|2005111745||t19280.0255686372s|780d38586ed4006b|26803|rds|list|data_modelling||0.039||
-data_modelling_ef685ae1|branch|36e03e7bbc612767|743d6fbb3827f258|94f45e4c0ae57022|1615013613||t19280.0255720058s|d9f0f396a24ba418|108217|rds|list|data_modelling||0.037||
-data_prediction_de792f21|branch|cb834d769288b0ea|70b3efeb05aaf729|12d20cfabac619a9|436098151||t19280.025580097s|dd56a5971d025bfa|192|rds|list|data_prediction||0.017||
-data_prediction_cbd8a8a6|branch|cb834d769288b0ea|70b3efeb05aaf729|a586c92b1253ebaa|289690730||t19280.0255828527s|dd56a5971d025bfa|192|rds|list|data_prediction||0.019||
-data_prediction_161ed64e|branch|cb834d769288b0ea|70b3efeb05aaf729|5930910987f98239|581445820||t19280.0255858384s|dd56a5971d025bfa|192|rds|list|data_prediction||0.02||
-data_prediction_ef685ae1|branch|cc2a580527c25b77|70b3efeb05aaf729|e12112f392b1320d|-1303395323||t19280.0255886894s|dd56a5971d025bfa|192|rds|list|data_prediction||0.019||
-initial_split_121f8e9e|branch|616d4e6c493b0a0d|6f130856d9ef7197|e512ffce5f49de13|947037335||t19280.0255969483s|42fbee5dabb3e292|156211|rds|list|initial_split||0.004||
-initial_split_7e7f7a9c|branch|de86067656a1d4b2|6f130856d9ef7197|48f789c34fdf50d9|-2022997008||t19280.025599779s|50a5acad598fc9c2|26801|rds|list|initial_split||0.003||
-initial_split_e84655e2|branch|c15a747b2d11baa0|6f130856d9ef7197|76d47dec5ca999e1|-1510514381||t19280.0256025972s|e58675e436fcfb8b|26964|rds|list|initial_split||0.003||
-initial_split_b5864f94|branch|a4726b03b630b015|6f130856d9ef7197|304bbc8db7d72b43|-448168433||t19280.0256055355s|208fc40a3803ab1d|108392|rds|list|initial_split||0.003||
-recipe_dabe9349|branch|7b53e16833e8cb6d|c0d6061bff468181|b5fd836fe1694db6|1066708248||t19280.025614309s|e986395551f2e5d3|284649|rds|list|recipe||0.045||
-recipe_e3c1a029|branch|c922c3de46dea78d|c0d6061bff468181|f8eabadd04be2f84|-777070679||t19280.0256176418s|f98473ea3379bd20|48962|rds|list|recipe||0.045||
-recipe_104d30c3|branch|208eea41511d6189|c0d6061bff468181|52a5796266c98628|-1303259314||t19280.0256208739s|6910910877bae949|49087|rds|list|recipe||0.04||
-recipe_ddefa2f3|branch|05e07c563efe1062|c0d6061bff468181|3fd534eaf4d381fa|-1501529611||t19280.0256243703s|d41bfb1f78d399d8|197486|rds|list|recipe||0.043||
-resampling_dabe9349|branch|edcecb6d21ca1502|7f72964fef4e84c1|4d044bcaf8073239|-1835756289||t19280.0256547901s|9d83ae31afc08c21|565729|rds|list|resampling||1.851||
-resampling_e3c1a029|branch||7f72964fef4e84c1|c42a1097b26e509a|1784589197||t19280.0256610254s||0|rds|list|resampling||0.285||There should be at least 2600 nrows in data
-data_imputed_18223f92|branch|92af6b8dfa199150|c0a0423ce2b145c3|024b392e193fe75c|-167241148||t19280.025543248s||156030|rds|list|data_imputed||7.692||Problem while computing gwl  zoona.approxgwl. gwl must be size 11688 or 1, not 5359.
-data_previous_week_predictors_18223f92|branch|3b779d8a22717479|5e892e8ed8ca62f8|3cc33224e219705b|794151380||t19287.5966789116s|7d745aab24ef4da2|822158|rds|list|data_previous_week_predictors||0.008||
-data_modelling_bcefb348|branch|35df9b124dec983b|97541d92be00ee0d|801dde990b0e4e74|898153872||t19287.5966871402s|4d4f03e9e1f1b149|391686|rds|list|data_modelling||0.004||
-data_prediction_bcefb348|branch|c1bd806f400ced77|430109d9e92b750b|cfc2f438f7e2c8dc|807669742||t19287.596695171s|b006b234c5606e5a|141471|rds|list|data_prediction||0.008||
-initial_split_1cdc93c7|branch|ee54c6635b2d14c8|6f130856d9ef7197|775d82c797c0e7ee|1290836350||t19287.5967035145s|c57a6b5e8d40c716|391857|rds|list|initial_split||0.004||
-resampling_7359a7ce|branch|32a42caf62fcbb5c|7f72964fef4e84c1|5c609a5b96ecc04c|139794464||t19287.5967467645s|2862f49f08921089|1425512|rds|list|resampling||1.883||
-plot_resamplingstrategy_4507b306|branch|6b1b861b6ef13df2|aeff7cf582cbbe4b|b63a1052f80dc2c7|-2021326664||t19287.59679256s|73591c5dc6ac4a85|10103505|rds|list|plot_resamplingstrategy||0.073||
-fitted_models_fe1f5c1a|branch|6b53fa36f0f8aef2|e3f8df67a0ff2922|1307275e927bed55|323623471||t19287.6054789775s|77d42cb00a65bca7|67654524|rds|list|fitted_models||741.338||
-predicted_test_split_4ab84f71|branch|1bb03260cc9d719d|5f5c80c718ef285b|00635b7d05834579|-959927483||t19287.6129551503s|2801a73ac047b54e|67789602|rds|list|predicted_test_split||635.773|Guerreros method for selecting a BoxCox parameter lambda is given for strictly positive data.|
-plot_model_accuracy_e1edcb3d|branch|24c6db9325eeec9c|3397c2d7ddb6a095|f36b13a5ebd30e52|1077623130||t19287.6201873588s|62019c920004069f|79230313|rds|list|plot_model_accuracy||613.248|Expecting the following names to be in the data frame .conf_hi, .conf_lo. Proceeding with .conf_interval_show  FALSE to visualize the forecast without confidence intervals.Alternatively, try using modeltime_calibrate before forecasting to add confidence intervals.|
-model_accuracy_07fe1940|branch|c3dac31cf00a10ef|147db908d303d448|5cc7611a67d164be|-336816122||t19287.6202174533s|167496ba8aba5e61|2929|rds|list|model_accuracy||0.717||
-recipe_basic_7359a7ce|branch|d91c0be9c9009718|849d5c0d31e5eeea|7f309d246e4fd0af|751217621||t19287.6336303048s|544d010e6c029016|378834|rds|list|recipe_basic||11.818||
-recipe_1_7359a7ce|branch|cd40689b34a58603|c2945c0130bcc60c|0b9df33db906e18e|1155750087||t19287.6336420738s|672f1b381fbca536|1072631|rds|list|recipe_1||0.134||
-recipe_7359a7ce|branch|7792d64741481660|c0d6061bff468181|4f424e75b8409a9d|-1683765063||t19287.6336536645s|a58f00752f377477|1784532|rds|list|recipe||0.045||
-workflow_set_7dce0251|branch|817e3bf1d92f36bc|b88bf34ced529998|73f33ba2734cee13|-2034978112||t19287.5967661659s||7514052|rds|list|workflow_set||0.034||The preprocessor must be an object with one of the following classes formula, recipe, workflow_variables
-workflow_set_85a42a73|branch|b1624a809f6ab228|b88bf34ced529998|e503c0130e433df4|1483810961||t19287.6400037009s|618c42812db80098|15826068|rds|list|workflow_set||11.787||
-tune_grid_xgboost|stem|9f6bb7c8e4bfaa28|b027616d681a4c2d|ee29529a9b6b2fb1|-1698655922||t19290.6054852476s|ec59789339be6316|412|rds|vector|||17.41|Paket forcats wurde unter R Version 4.1.3 erstellt|
-model_automl|stem|56500b8906f9fee9|66e87f362270c08b|886e3b1236fa95fa|-608347024||t19290.6054884884s|7c2774c7538495bc|160|rds|vector|||0||
-data_all|stem|e6eb97cfc4131917|1c65e39940b7a81a|9be0fd17e97c7d5d|-1004549426||t19290.605603904s|9651d6845012c4e1|1442709|rds|vector|||9.28||
-tune_grid_svm|stem|f716a0b25dca3660|f9bba7d1650f1e99|ee394e115f79cebc|894598969||t19290.6056089735s|3ffee416faaef59c|178|rds|vector|||0.02||
-tune_grid_prophet|stem|6af9e801fc6b59cb|379f8d5e800c39c0|e3154072dddfa424|1499125109||t19290.6056119596s|ece14d0b6ff42c75|216|rds|vector|||0||
-model_grid_xgboost|stem|c1048c5893581574|c79e5b96cbd21a32|b23e6ab547f5406c|1649779694||t19290.6058648881s|cd09f8c4d3665da5|5819|rds|vector|||21.31||
-model_grid_svm|stem|89175db39dd96355|23153a344a6e8ba8|2f1ba4c9e7086179|299756043||t19290.6058758025s|591df75fa19b99ec|483|rds|vector|||0.21||
-model_grid_prophet|stem|c35916348d514d47|bb38e8cdfc37ce9f|ab571858f6c314c1|-413671200||t19290.6058877007s|309741933c2ba333|836|rds|vector|||0.77||
-data_no_empty_cols_3ffcd33c|branch|fa11621beb47d49c|d0f144b16e2f366a|92a5cd0f7dac388b|405811274||t19290.6058945294s|eccf32dcf85b7464|324740|rds|list|data_no_empty_cols||0||
-data_no_empty_cols|pattern|24a24f360a0313c1|d0f144b16e2f366a||-15274340||||324740|rds|list||data_no_empty_cols_3ffcd33c|0||
-data_previous_week_predictors_9df19dd0|branch|1f607a0c2fa902d6|5e892e8ed8ca62f8|12679df968554656|401430051||t19290.6059046682s|852b103a6c897566|822158|rds|list|data_previous_week_predictors||0||
-data_previous_week_predictors|pattern|3c5f810c6ad3db68|5e892e8ed8ca62f8||2125896785||||822158|rds|list||data_previous_week_predictors_9df19dd0|0||
-data_modelling|pattern|74148f7c45d7d984|97541d92be00ee0d||436128794||||391688|rds|list||data_modelling_c64b0173|0||
-data_prediction_c64b0173|branch|b4a39a1220d5c0ed|430109d9e92b750b|ab7e2b5b68fa4b60|27189162||t19290.6059238234s|ea0c5b61a4aaf33b|141471|rds|list|data_prediction||0.02||
-data_prediction|pattern|5bafafbbb7c38fd8|430109d9e92b750b||-2083821375||||141471|rds|list||data_prediction_c64b0173|0.02||
-initial_split_390ec13c|branch|ed910310e3666851|6f130856d9ef7197|5249d9956bfdfce8|-1424525230||t19290.6059329669s|a28772cb0c139c7a|391859|rds|list|initial_split||0||
-initial_split|pattern|54bf6b8812a7c473|6f130856d9ef7197||-1396285838||||391859|rds|list||initial_split_390ec13c|0||
-resampling_6858a258|branch|3073c00e4045093d|7f72964fef4e84c1|c8671f76e38a2f56|544524488||t19290.605969703s|42a58dce26a49928|1425513|rds|list|resampling||2.25||
-resampling|pattern|25c38f586f72a2fe|7f72964fef4e84c1||1707484335||||1425513|rds|list||resampling_6858a258|2.25||
-plot_resamplingstrategy_bb7dbaf8|branch|c097bd82db7e188d|aeff7cf582cbbe4b|cf9d96716a35bf3d|995668494||t19290.6060328744s|bdcbc6378e496abe|10103485|rds|list|plot_resamplingstrategy||0.06||
-plot_resamplingstrategy|pattern|d7455c5eece1f536|aeff7cf582cbbe4b||-1582173113||||10103485|rds|list||plot_resamplingstrategy_bb7dbaf8|0.06||
-recipe_basic_6858a258|branch|f26910a2d8aa39cd|849d5c0d31e5eeea|6ed4af262281a470|198248548||t19290.6252522221s|7f31845bbf5652b9|391656|rds|list|recipe_basic||11.63|Paket forcats wurde unter R Version 4.1.3 erstellt|
-recipe_basic|pattern|e14e569a6bb95e57|849d5c0d31e5eeea||603684721||||391656|rds|list||recipe_basic_6858a258|11.63||
-split_dates|stem|74ccb83b0a95ec35|704b682300559274|2b13849809fffd8d|-1951270263||t19290.6656454908s|7265f9a2a80e518f|260|rds|list||split_dates_468b11a9|18.04|Paket forcats wurde unter R Version 4.1.3 erstellt|
-data|stem|37446831558d8145|550eeef26f472af5|a5cdb677cbcfc63c|1588979285||t19290.6656511505s|2e372ec468bfe1cf|326707|rds|list||data_a694fc7a|0.02||
-data_modelling_c64b0173|branch|bfd16d49cae41a5f|97541d92be00ee0d|6c7cdd95d86f2ff8|-1154326010||t19290.6656686158s|1db8c4803832c463|391688|rds|list|data_modelling||0||
-recipe_6858a258|branch|2d4cdd3391643dbb|c0d6061bff468181|50e224fa2fadd10b|-854296546||t19290.6704213875s|a6548033136b56b3|713321|rds|list|recipe||0.05||
-recipe|pattern|a4011bf4546bd736|c0d6061bff468181||1894568478||||713321|rds|list||recipe_6858a258|0.05||
-recipe_1_6858a258|branch|8c802ba538e285dd|c2945c0130bcc60c|3c49268589810a82|-2007297180||t19290.6721507802s|472b2ce9c5499764|714263|rds|list|recipe_1||11.73|Paket forcats wurde unter R Version 4.1.3 erstellt|
-recipe_1|pattern|7e95e31537c71c20|c2945c0130bcc60c||-1855584516||||714263|rds|list||recipe_1_6858a258|11.73||
-workflow_set_08276c23|branch|e0cf0375e3f92881|b88bf34ced529998|d42b95cc7de75c04|-909725117||t19291.3578427459s|45e976e3aea30b3a|14619608|rds|list|workflow_set||18.74|Paket forcats wurde unter R Version 4.1.3 erstellt|
-workflow_set|pattern|48302b2949abf638|b88bf34ced529998||301707764||||14619608|rds|list||workflow_set_08276c23|18.74||
-fitted_models_b591ea40|branch|368625f8ddbe608c|e3f8df67a0ff2922|e034b0e68d1804e9|1744403763||t19291.3644395526s|4a72fb56295fe958|629922040|rds|list|fitted_models||523.8||
-fitted_models|pattern|547f1053376229fd|e3f8df67a0ff2922||-670788693||||629922040|rds|list||fitted_models_b591ea40|523.8||
-predicted_test_split_94bd57f1|branch|74e94a1cd9b50dc8|5f5c80c718ef285b|f3723ed20509b16f|1852094358||t19291.3791440267s|f5601c364070f576|630322969|rds|list|predicted_test_split||1209.38|Guerreros method for selecting a BoxCox parameter lambda is given for strictly positive data.|
-predicted_test_split|pattern|7928eac54ae91255|5f5c80c718ef285b||-660279935||||630322969|rds|list||predicted_test_split_94bd57f1|1209.38||
-plot_model_accuracy_7e2b6c95|branch|399e70c035ca6bd4|3397c2d7ddb6a095|95130ed70c6b914b|1372474065||t19291.3936462317s|086158d020b039f0|646571098|rds|list|plot_model_accuracy||1188.1|Expecting the following names to be in the data frame .conf_hi, .conf_lo. Proceeding with .conf_interval_show  FALSE to visualize the forecast without confidence intervals.Alternatively, try using modeltime_calibrate before forecasting to add confidence intervals.|
-plot_model_accuracy|pattern|efe450037bd85012|3397c2d7ddb6a095||1902277207||||646571098|rds|list||plot_model_accuracy_7e2b6c95|1188.1||
-model_accuracy_7a25a8ac|branch|e4ccc484c38f014f|147db908d303d448|54825f2b213c2ccf|214062382||t19291.3938718801s|6a3742dec8805aa1|3524|rds|list|model_accuracy||1.74||
-model_accuracy|pattern|76a3a357a8652bab|147db908d303d448||-587516985||||3524|rds|list||model_accuracy_7a25a8ac|1.74||
-make_recipe_1|function|51af7a53b9e6d6e3||||||||||||||
-list.files.github|function|96f7b29ecd8217cb||||||||||||||
-summarise_by_week|function|4adf2ae7ec41e387||||||||||||||
-PARALLEL|object|3139974ca770b82a||||||||||||||
-make_recipe|function|af7898be875b2250||||||||||||||
-make_recipe_basic|function|75815ce34790d587||||||||||||||
-aggregated_predictors|function|31d06c8f05421515||||||||||||||
-slice_by_wellid|function|47168095287be214||||||||||||||
-make_workflow_set|function|4548ef3e8ecf59f2||||||||||||||
-CV_LAG|object|c158e757437b80f5||||||||||||||
-YML_CONFIG|object|073c1a8c8eab3b49||||||||||||||
-CV_SKIP|object|3a671b8aa65fd448||||||||||||||
-PATH_GITHUB_GROUNDWATERCHALLENGE|object|c91b4acb0e179974||||||||||||||
-PATH_GITHUB_REPO|object|69689542ee2074e2||||||||||||||
-read_csv_and_add_path_as_column|function|336d2d2f298d66e8||||||||||||||
-SPLIT_DATES|object|dee86fa27013a095||||||||||||||
-HYPPAR_COMBINATIONS|object|5b4df89a64a04428||||||||||||||
-ALLOW_PAR|object|0505a9e7ec7c6343||||||||||||||
-CV_ASSESS|object|3a671b8aa65fd448||||||||||||||
-make_model_grid_prophet|function|35bb545360a45430||||||||||||||
-SINGLE_WELL|object|0505a9e7ec7c6343||||||||||||||
-targets_import|object|2eba55cd02b7a59c||||||||||||||
-make_tune_grid_prophet|function|24c7040962e7ee31||||||||||||||
-CV_INITIAL|object|311a16b39012c798||||||||||||||
-make_model_automl|function|7ca1abe90e4be977||||||||||||||
-targets_preprocessing|object|f459046642e92ce1||||||||||||||
-INITIAL_PROP|object|7b382c66af5e7469||||||||||||||
-path_functions|object|59af2dd4153e940d||||||||||||||
-path_targets|object|25dd98ece6e7ce64||||||||||||||
-targets_modelling|object|f7556911edc06d22||||||||||||||
-CORES|object|a8ca5deaeabce229||||||||||||||
-slice_modelling_period|function|b747d07f3972656f||||||||||||||
-make_model_grid_xgboost|function|656a39c6c24e450a||||||||||||||
-make_tune_grid_xgboost|function|a98ab538a466cfd1||||||||||||||
-make_tune_grid_svm|function|73195eedd2e69b2d||||||||||||||
-SINGLE_WELL_SITE|object|478eee1cd80f4e72||||||||||||||
-make_model_grid_svm|function|78e1d820c1b5f98e||||||||||||||
-import_data_allwells_github|function|2cab918459d4025f||||||||||||||
-fit_models|function|09794bd6e944f06e||||||||||||||
-make_resampling|function|1e9abc05b448fe9e||||||||||||||
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+aggregated_predictors|function|31d06c8f05421515|||||||||||||||
+ALLOW_PAR|object|0505a9e7ec7c6343|||||||||||||||
+best_model_cl_4aa21f89|branch||061fecaa30e557e5|a3c09656ed2914f0|-1799181627||t19303.6414005708s||0|rds|local|list|best_model_cl||0.03||x should be a parsnip model specification.
+best_model_cl_f869b2fc|branch||061fecaa30e557e5|d181ad2abf7b7d35|2034181757||t19303.6326478418s||0|rds|local|list|best_model_cl||0||nicht anwendbare Methode für extract_workflow auf Objekt der Klasse list angewendet
+best_performance_cl|pattern|a409e048a681718d|9540a7bfcdb25fe4||-403347727||||21871|rds|local|list||best_performance_cl_0a0eaf14|22.25||
+best_performance_cl_0a0eaf14|branch|48158771ea4d52ce|9540a7bfcdb25fe4|13bc57d4011130cc|-1216273725||t19303.8245299175s|12ddcfe14baf9474|21871|rds|local|list|best_performance_cl||22.25||
+best_performance_cl_7ca3a4ac|branch||33fe65474ac644d6|2c587a35b482ccb2|-1957578998||t19303.6241084725s||0|rds|local|list|best_performance_cl||0.03||No select_best exists for this type of object.
+best_workflow_cl|pattern|772b9b9c1e5a5cb7|2a40ee7b5205fe0e||-803009777||||11544760|rds|local|list||best_workflow_cl_ad98ff7a|72.97||
+best_workflow_cl_4aa21f89|branch||061fecaa30e557e5|cc34fd94d44e7fcf|-1785327807||t19303.6733104021s||0|rds|local|list|best_workflow_cl||0.03||Argument split fehlt ohne Standardwert
+best_workflow_cl_ad98ff7a|branch|05a43b3f81ee284d|2a40ee7b5205fe0e|5beefedf96887491|637824415||t19303.825629872s|1cf0ab58e0f2846d|11544760|rds|local|list|best_workflow_cl||72.97|Paket forecast wurde unter R Version 4.1.3 erstellt|
+CORES|object|d30d6a574c194f97|||||||||||||||
+CV_ASSESS|object|3a671b8aa65fd448|||||||||||||||
+CV_INITIAL|object|311a16b39012c798|||||||||||||||
+CV_LAG|object|c158e757437b80f5|||||||||||||||
+CV_SKIP|object|3a671b8aa65fd448|||||||||||||||
+data|stem|eee03b43ba39c02d|550eeef26f472af5|886e919517940f6b|1588979285||t19303.5892985465s|4cd633d3f706d30c|325387|rds|local|list||data_3d8f4bf7|0.03||
+data_all|stem|eb76ae7403cdc1d5|1c65e39940b7a81a|82a1f8b12a3e2b6d|-1004549426||t19303.5889513588s|d77ebfdf7d7d7815|1449851|rds|local|vector|||10.68||
+data_modelling|pattern|66cf2c05ff9df22e|97541d92be00ee0d||436128794||||391688|rds|local|list||data_modelling_aea7f24c|0||
+data_modelling_aea7f24c|branch|bfd16d49cae41a5f|97541d92be00ee0d|9ac057a3dfd7bffb|1396203786||t19303.5893372271s|1db8c4803832c463|391688|rds|local|list|data_modelling||0||
+data_no_empty_cols|pattern|c251aa1e63d1eca5|d0f144b16e2f366a||-15274340||||324740|rds|local|list||data_no_empty_cols_196d2981|0||
+data_no_empty_cols_196d2981|branch|fa11621beb47d49c|d0f144b16e2f366a|386ab22611172ddd|-967711666||t19303.5893163012s|eccf32dcf85b7464|324740|rds|local|list|data_no_empty_cols||0||
+data_prediction|pattern|0b6b7f8da50f56c1|430109d9e92b750b||-2083821375||||141471|rds|local|list||data_prediction_aea7f24c|0||
+data_prediction_aea7f24c|branch|b4a39a1220d5c0ed|430109d9e92b750b|cbdca1b8f439a732|1864145614||t19303.5893468104s|ea0c5b61a4aaf33b|141471|rds|local|list|data_prediction||0||
+data_previous_week_predictors|pattern|65cbc9dc5669ed52|5e892e8ed8ca62f8||2125896785||||822158|rds|local|list||data_previous_week_predictors_cf9898f1|0.02||
+data_previous_week_predictors_cf9898f1|branch|1f607a0c2fa902d6|5e892e8ed8ca62f8|f5b898a8d7b53d76|-39933400||t19303.5893268336s|852b103a6c897566|822158|rds|local|list|data_previous_week_predictors||0.02||
+fit_best_model|function|ee548ad8fa5b8955|||||||||||||||
+fit_models|function|c8b8b190b787933d|||||||||||||||
+fitted_models_cl|pattern|e43bbfdcea2e4e01|c0906b8d80775add||-346186273||||1068875405|rds|local|list||fitted_models_cl_0eefa80c|12009.39||
+fitted_models_cl_0c8a3dfa|branch|2941598cf1eaa850|c0906b8d80775add|9d946fbf80d1ab10|1844751375||t19303.6270021719s|4d5fa30bd3dd30f3|3246345|rds|local|list|fitted_models_cl||7.83|Paket forecast wurde unter R Version 4.1.3 erstellt|
+fitted_models_cl_0eefa80c|branch|31fbe5d9d43b9453|c0906b8d80775add|041aa3c891e4dd63|357586410||t19303.8238309934s|5e688392a55b4e1d|1068875405|rds|local|list|fitted_models_cl||12009.39||
+HYPPAR_COMBINATIONS|object|ca808a6897119185|||||||||||||||
+HYPPAR_LEVELS|object|ca808a6897119185|||||||||||||||
+import_data_allwells_github|function|75ff65eda8d849ec|||||||||||||||
+INITIAL_PROP|object|7b382c66af5e7469|||||||||||||||
+initial_split|pattern|db479a7ecb29af4f|6f130856d9ef7197||-1396285838||||391859|rds|local|list||initial_split_e0215843|0.02||
+initial_split_e0215843|branch|ed910310e3666851|6f130856d9ef7197|6e235bafde14f3a6|939741003||t19303.5893563359s|a28772cb0c139c7a|391859|rds|local|list|initial_split||0.02||
+list.files.github|function|96f7b29ecd8217cb|||||||||||||||
+make_model_automl|function|7ca1abe90e4be977|||||||||||||||
+make_model_grid_nnetar|function|c91e6307567df7fc|||||||||||||||
+make_model_grid_prophet|function|35bb545360a45430|||||||||||||||
+make_model_grid_svm|function|78e1d820c1b5f98e|||||||||||||||
+make_model_grid_xgboost|function|656a39c6c24e450a|||||||||||||||
+make_recipe_pure|function|75815ce34790d587|||||||||||||||
+make_recipe_pure_but_all_standard_predictors|function|5db5e81ed6c18e18|||||||||||||||
+make_recipe_recipe_lag_pca_zv_dateext|function|eaba6eca77935272|||||||||||||||
+make_resampling|function|1e9abc05b448fe9e|||||||||||||||
+make_tune_grid_nnetar|function|26278caad966266a|||||||||||||||
+make_tune_grid_prophet|function|3e4d3a267cfb2fca|||||||||||||||
+make_tune_grid_svm|function|73195eedd2e69b2d|||||||||||||||
+make_tune_grid_xgboost|function|a98ab538a466cfd1|||||||||||||||
+make_workflow_set|function|4548ef3e8ecf59f2|||||||||||||||
+model_automl|stem|56500b8906f9fee9|66e87f362270c08b|886e3b1236fa95fa|-608347024||t19303.5888211976s|7c2774c7538495bc|160|rds|local|vector|||0.02||
+model_grid_nnetar|stem|576e2b7f87bb1e23|0d15ed273a7a5051|1755e8328d7448e2|-1058617364||t19303.6830536813s|7ef2bee4e3e6c5d1|1930|rds|local|vector|||6.91||
+model_grid_prophet|stem|794bab866226f9d8|bb38e8cdfc37ce9f|9a60d7a7fd7bd7fa|-413671200||t19303.6830898156s|089d1a7ccda1d8c5|1305|rds|local|vector|||2.76||
+model_grid_svm|stem|89175db39dd96355|23153a344a6e8ba8|2f1ba4c9e7086179|299756043||t19303.5893055025s|591df75fa19b99ec|483|rds|local|vector|||0.28||
+model_grid_xgboost|stem|c1048c5893581574|c79e5b96cbd21a32|b23e6ab547f5406c|1649779694||t19303.5892933613s|cd09f8c4d3665da5|5819|rds|local|vector|||27.82||
+nse|function|8ad80495d1ace8a0|||||||||||||||
+nse.data.frame|function|fe9c203a59b98abe|||||||||||||||
+nse_vec|function|ab47a3ac82fc306d|||||||||||||||
+PARALLEL|object|3139974ca770b82a|||||||||||||||
+path_functions|object|59af2dd4153e940d|||||||||||||||
+PATH_GITHUB_GROUNDWATERCHALLENGE|object|c91b4acb0e179974|||||||||||||||
+PATH_GITHUB_REPO|object|69689542ee2074e2|||||||||||||||
+path_targets|object|25dd98ece6e7ce64|||||||||||||||
+plot_resamplingstrategy|pattern|d3faeaf627298f86|aeff7cf582cbbe4b||-1582173113||||10103485|rds|local|list||plot_resamplingstrategy_de6e77ef|0.08||
+plot_resamplingstrategy_de6e77ef|branch|c097bd82db7e188d|aeff7cf582cbbe4b|02dff7a9c651c172|581135500||t19303.5894511855s|bdcbc6378e496abe|10103485|rds|local|list|plot_resamplingstrategy||0.08||
+read_csv_and_add_path_as_column|function|336d2d2f298d66e8|||||||||||||||
+recipe_lag_pca_zv_dateext|pattern|cd66d0f322676ff4|0e11604c92d6e3a6||359570343||||714388|rds|local|list||recipe_lag_pca_zv_dateext_5cbe4d62|0||
+recipe_lag_pca_zv_dateext_5cbe4d62|branch|f721863f312f1eef|0e11604c92d6e3a6|170d57efcf5683db|-1681677123||t19303.5894017758s|76c886d630435e45|714388|rds|local|list|recipe_lag_pca_zv_dateext||0||
+recipe_pure|pattern|f7cac88106d60fb3|acc3e8c8a5fc806b||998974935||||391656|rds|local|list||recipe_pure_5cbe4d62|0||
+recipe_pure_5cbe4d62|branch|4968d16695146c09|acc3e8c8a5fc806b|faf12be5a8cbac44|1363073026||t19303.5894234077s|7f31845bbf5652b9|391656|rds|local|list|recipe_pure||0||
+recipe_pure_but_all_standard_predictors|pattern|36489fa9df05eca1|c45b15629b113e34||867316961||||712610|rds|local|list||recipe_pure_but_all_standard_predictors_5cbe4d62|0.03||
+recipe_pure_but_all_standard_predictors_5cbe4d62|branch|3757d08d13197e7b|c45b15629b113e34|65f4c0671940015c|1819182110||t19303.5894129679s|4f5a58f5f0fb2170|712610|rds|local|list|recipe_pure_but_all_standard_predictors||0.03||
+resampling|pattern|10db30975e40830d|7f72964fef4e84c1||1707484335||||1425513|rds|local|list||resampling_5cbe4d62|1.92||
+resampling_5cbe4d62|branch|3073c00e4045093d|7f72964fef4e84c1|1afcc7fa475e7c26|-1389891460||t19303.5893897387s|42a58dce26a49928|1425513|rds|local|list|resampling||1.92||
+SINGLE_WELL|object|0505a9e7ec7c6343|||||||||||||||
+SINGLE_WELL_SITE|object|478eee1cd80f4e72|||||||||||||||
+slice_by_wellid|function|47168095287be214|||||||||||||||
+slice_modelling_period|function|b747d07f3972656f|||||||||||||||
+split_dates|stem|74ccb83b0a95ec35|704b682300559274|2b13849809fffd8d|-1951270263||t19303.5889637315s|7265f9a2a80e518f|260|rds|local|list||split_dates_468b11a9|0.03||
+SPLIT_DATES|object|dee86fa27013a095|||||||||||||||
+summarise_by_week|function|4adf2ae7ec41e387|||||||||||||||
+targets_import|object|803436216f502757|||||||||||||||
+targets_modelling_cl|object|a568785974dc355b|||||||||||||||
+targets_modelling_mt|object|7055da0484bb0f94|||||||||||||||
+targets_modelling_setup|object|e0270bed629fb10a|||||||||||||||
+targets_preprocessing|object|8ad32066559e0fe4|||||||||||||||
+tune_bayes_resampling|function|ee00a3631d3e732b|||||||||||||||
+tune_grid_nnetar|stem|262aa22d74e21407|ef9cd18136aa0da6|2ccdc720b71c361b|430591957||t19303.6829656604s|cb3ddd769da4ef5f|258|rds|local|vector|||21.89|Paket lubridate wurde unter R Version 4.1.3 erstellt. Paket httr wurde unter R Version 4.1.3 erstellt. Paket doParallel wurde unter R Version 4.1.3 erstellt. Paket rlang wurde unter R Version 4.1.3 erstellt. Paket tidymodels wurde unter R Version 4.1.3 erstellt. Paket broom wurde unter R Version 4.1.3 erstellt. Paket dials wurde unter R Version 4.1.3 erstellt. Paket scales wurde unter R Version 4.1.3 erstellt. Paket dplyr wurde unter R Version 4.1.3 erstellt. Paket ggplot2 wurde unter R Version 4.1.3 erstellt. Paket infer wurde unter R Version 4.1.3 erstellt. Paket modeldata wurde unter R Version 4.1.3 erstellt. Paket parsnip wurde unter R Version 4.1.3 erstellt. Paket rsample wurde unter R Version 4.1.3 erstellt. Paket tibble wurde unter R Version 4.1.3 erstellt. Paket tidyr wurde unter R Version 4.1.3 erstellt. Paket tune wurde unter R Version 4.1.3 erstellt. Paket workflows wurde unter R Version 4.1.3 erstellt. Paket workflowsets wurde unter R Version 4.1.3 erstellt. Paket yardstick wurde unter R Version 4.1.3 erstellt. Paket tidyverse wurde unter R Version 4.1.3 erstellt. Paket readr wurde unter R Version 4.1.3 erstellt. Paket stringr wurde unter R Version 4.1.3 erstellt. Paket forcats wurde unter R Version 4.1.3 erstellt|
+tune_grid_prophet|stem|e14545d9b9921bb7|379f8d5e800c39c0|c1eb5f9a67d31d2d|1499125109||t19303.6829702785s|d82036a1ced21a80|235|rds|local|vector|||0.02||
+tune_grid_svm|stem|f716a0b25dca3660|f9bba7d1650f1e99|ee394e115f79cebc|894598969||t19303.5889569259s|3ffee416faaef59c|178|rds|local|vector|||0||
+tune_grid_xgboost|stem|9f6bb7c8e4bfaa28|b027616d681a4c2d|ee29529a9b6b2fb1|-1698655922||t19303.5888179571s|ec59789339be6316|412|rds|local|vector|||0.02||
+tune_resampling|function|4476e5b7981c2254|||||||||||||||
+workflow_set|pattern|da37c313a2967422|b27088b55e839ca7||301707764||||69626130|rds|local|list||workflow_set_dec10ac6|0.53||
+workflow_set_dec10ac6|branch|e8dde5622e3632ff|b27088b55e839ca7|bbca9b2826641649|-1590508989||t19303.6832589361s|2f6aab7a3ece9368|69626130|rds|local|list|workflow_set||0.53||
+workflow_set_f7a6ef63|branch|c7ed66888f98b202|effd91b1ed64991c|a9015d520e86902a|2008557215||t19303.6235036743s|f231866551f25c29|392316|rds|local|list|workflow_set||0.02||
+YML_CONFIG|object|d76facec0411e254|||||||||||||||

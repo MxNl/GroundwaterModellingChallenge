@@ -14,7 +14,8 @@ cv_lag: 365
 
 # Parallel
 allow_par: TRUE
-cores: 9
+cores: 30
 
 # Tuning
-hyppar_combinations: 12
+hyppar_combinations: 5
+hyppar_levels: 5
