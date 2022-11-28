@@ -35,18 +35,131 @@ targets_modelling_cl <- list(
     pattern = map(model_ensemble),
     iteration = "list"
   ),
+
+# Repititions -------------------------------------------------------------
+
+  tar_target(
+    fit_repeats,
+    1:10
+  ),
   tar_target(
     fitted_ensemble,
     blended_ensemble |> 
       fit_members(),
-    pattern = map(blended_ensemble),
+    pattern = cross(blended_ensemble, fit_repeats),
     iteration = "list"
   ),
   tar_target(
-    predictions_ensemble,
-    testing(initial_split) %>%
-      bind_cols(predict(fitted_ensemble, .)),
-    pattern = map(initial_split, fitted_ensemble),
+    initial_split_repeats,
+    initial_split,
+    pattern = cross(initial_split, fit_repeats),
     iteration = "list"
+  ),
+  tar_target(
+    data_training_repeats,
+    initial_split %>% training(),
+    pattern = cross(initial_split, fit_repeats),
+    iteration = "list"
+  ),
+  tar_target(
+    data_modelling_repeats,
+    data_modelling,
+    pattern = cross(data_modelling, fit_repeats),
+    iteration = "list"
+  ),
+  tar_target(
+    data_prediction_repeats,
+    data_prediction,
+    pattern = cross(data_prediction, fit_repeats),
+    iteration = "list"
+  ),
+  tar_target(
+    data_train_test_pred_full,
+    data_modelling |> 
+      bind_rows(data_prediction),
+    pattern = map(data_modelling, data_prediction),
+    iteration = "list"
+  ),
+  tar_target(
+    data_train_test_pred_full_repeats,
+    data_train_test_pred_full,
+    pattern = cross(data_train_test_pred_full, fit_repeats),
+    iteration = "list"
+  ),
+
+# Predictions -------------------------------------------------------------
+
+  tar_target(
+    predictions_ensemble_test,
+    testing(initial_split_repeats) %>%
+      bind_cols(predict(fitted_ensemble, .)),
+    pattern = map(initial_split_repeats, fitted_ensemble),
+    iteration = "list"
+  ),
+  tar_target(
+    predictions_ensemble_training,
+    data_training_repeats %>%
+      bind_cols(predict(fitted_ensemble, .)),
+    pattern = map(data_training_repeats, fitted_ensemble),
+    iteration = "list"
+  ),
+  tar_target(
+    predictions_ensemble_training_full,
+    data_modelling_repeats %>%
+      bind_cols(predict(fitted_ensemble, .)),
+    pattern = map(data_modelling_repeats, fitted_ensemble),
+    iteration = "list"
+  ),
+  tar_target(
+    predictions_ensemble_test_full,
+    data_prediction_repeats %>%
+      bind_cols(predict(fitted_ensemble, .)),
+    pattern = map(data_prediction_repeats, fitted_ensemble),
+    iteration = "list"
+  ),
+  tar_target(
+    predictions_train_test_pred_full,
+    data_train_test_pred_full_repeats %>%
+      bind_cols(predict(fitted_ensemble, .)),
+    pattern = map(data_train_test_pred_full_repeats, fitted_ensemble),
+    iteration = "list"
+  ),
+
+# Plotting ----------------------------------------------------------------
+
+  tar_target(
+    plot_results_obs_and_preds,
+    make_plot_results_obs_and_preds(predictions_ensemble_test)
+  ),
+  tar_target(
+    plot_results_obs_and_preds_wtrain,
+    make_plot_results_obs_and_preds_wtrain(
+      predictions_ensemble_training,
+      predictions_ensemble_test
+    )
+  ),
+  tar_target(
+    plot_results_obs_and_preds_wtrain_full,
+    make_plot_results_obs_and_preds_wtrain_full(
+      predictions_ensemble_training,
+      predictions_ensemble_test,
+      predictions_ensemble_test_full
+    )
+  ),
+  tar_target(
+    plot_results_obs_and_preds_train_test_pred_full,
+    make_plot_results_obs_and_preds_train_test_pred_full(
+      # predictions_ensemble_training,
+      predictions_ensemble_test,
+      predictions_train_test_pred_full
+    )
+  ),
+  tar_target(
+    performance_table,
+    make_performance_table(predictions_ensemble_test)
+  ),
+  tar_target(
+    performance_table_training,
+    make_performance_table(predictions_ensemble_training)
   )
 )

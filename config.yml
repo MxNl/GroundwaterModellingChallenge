@@ -2,20 +2,20 @@
 parallel: FALSE
 
 # Scope
-single_well: TRUE
+single_well: FALSE
 single_well_site: 1
 
 # Testing and Resampling
 initial_prop: 0.9
-cv_initial: 2000
-cv_assess: 600
-cv_skip: 600
-cv_lag: 365
+cv_initial: 0.5
+cv_assess: 0.125
+cv_skip: 0.125
+cv_lag: 365, 52
 
 # Parallel
 allow_par: TRUE
 cores: 30
 
 # Tuning
-hyppar_combinations: 6
-hyppar_levels: 6
+hyppar_combinations: 5
+hyppar_levels: 5

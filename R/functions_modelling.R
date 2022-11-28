@@ -1,11 +1,16 @@
 make_resampling <- function(x) {
+  nrow = nrow(x)
+  well_id <- x |> 
+    pull(well_id) |> 
+    unique()
+  
   x |>
     timetk::time_series_cv(
       date,
-      initial = CV_INITIAL,
-      assess = CV_ASSESS,
-      skip = CV_ASSESS,
-      lag = CV_LAG,
+      initial = floor(nrow * CV_INITIAL),
+      assess = floor(nrow * CV_ASSESS),
+      skip = floor(nrow * CV_ASSESS),
+      lag = if_else(str_detect(well_id, "Sweden"), CV_LAG[2], CV_LAG[1]),
       cumulative = TRUE
     )
 }
@@ -17,14 +22,21 @@ summarise_by_week <- function(x) {
 
 make_recipe_pure <- function(x) {
   recipe(gwl ~ tg + rr + date, data = x) |>
+    step_rm(contains("_lag")) |> 
     step_normalize(all_numeric_predictors())
 }
 
-make_recipe_pure_but_all_standard_predictors <- function(x) {
+make_recipe_wolag_logtrans_linimp_norm <- function(x) {
   recipe(gwl ~ ., data = x) |>
+    step_rm(contains("_lag")) |> 
+    # timetk::step_ts_impute(all_numeric_predictors(), all_outcomes()) |> 
+    # timetk::step_slidify_augment(rr, tg, period = c(30, 90), partial = TRUE, .f = ~mean(.x), align = "right") |>
+    step_log(et, rr, offset = 1E-5) |>
+    step_impute_linear(all_numeric_predictors()) |> 
+    # timetk::step_ts_impute(all_numeric_predictors()) |> 
     # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
-    step_normalize(all_numeric_predictors()) |>
-    update_role(well_id, new_role = "id")
+    step_normalize(all_numeric_predictors()) |> 
+    update_role(well_id, new_role = "id") 
     # step_lag(contains("previous_week"), lag = 1:5) |>
     # timetk::step_ts_clean(all_numeric()) |>
     # timetk::step_timeseries_signature(date) |>
@@ -33,7 +45,7 @@ make_recipe_pure_but_all_standard_predictors <- function(x) {
     # recipes::step_zv(all_predictors())
 }
 
-make_recipe_recipe_lag_pca_zv_dateext <- function(x) {
+make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca <- function(x) {
   # well_id <- x |>
   #   slice(1) |>
   #   pull(well_id)
@@ -44,17 +56,74 @@ make_recipe_recipe_lag_pca_zv_dateext <- function(x) {
   # )
 
   recipe(gwl ~ ., data = x) |>
+    step_rm(contains("_lag")) |> 
     # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
-    recipes::step_normalize(recipes::all_numeric_predictors()) |>
-    recipes::step_lag(dplyr::contains("previous_week"), lag = 1:5) |>
-    timetk::step_ts_clean(recipes::all_numeric()) |>
+    update_role(well_id, new_role = "id") |>
+    # step_lag(contains("previous_week"), lag = 1:5) |>
+    step_log(et, rr, offset = 1E-5) |>
+    step_impute_linear(all_numeric_predictors(), -rr) |>
+    # step_slidify_augment(rr, tg, period = seq(10, 100, by = 10), partial = TRUE, .f = ~ mean(.x), align = "right") |>
+    step_normalize(all_numeric_predictors()) |> 
+    # timetk::step_ts_clean(recipes::all_numeric()) |>
     # timetk::step_timeseries_signature(date) |>
-    recipes::step_rm(well_id) |>
-    recipes::step_zv(recipes::all_predictors()) |>
-    recipes::step_date(date, features = c("month", "quarter")) |>
-    # embed::step_embed(recipes::all_nominal_predictors())
-    recipes::step_dummy(recipes::all_nominal_predictors(), one_hot = TRUE) |> 
-    step_pca(all_predictors())
+    step_zv(all_predictors()) |>
+    step_date(date, features = c("month", "quarter")) |>
+    # embed::step_embed(recipes::all_nominal_predictors()) |> 
+    # step_dummy(all_nominal_predictors(), one_hot = TRUE) |> 
+    # step_impute_linear(all_numeric_predictors()) |> 
+    step_corr(all_numeric_predictors()) |> 
+    # timetk::step_fourier(date, period = 365, K = 5) |> 
+    step_pca(all_numeric_predictors())
+}
+
+make_recipe_wolag_logtrans_linimp_norm_zv_corr <- function(x) {
+
+  recipe(gwl ~ ., data = x) |>
+    step_rm(contains("_lag")) |> 
+    update_role(well_id, new_role = "id") |>
+    # step_lag(contains("previous_week"), lag = seq(7, 7 * 25, 7)) |>
+    # step_impute_linear(contains("lag")) |> 
+    step_log(et, rr, offset = 1E-5) |>
+    step_impute_linear(all_numeric_predictors(), -rr) |>
+    step_normalize(all_numeric_predictors()) |> 
+    step_zv(all_predictors()) |>
+    step_corr(all_numeric_predictors())
+}
+
+make_recipe_lag_logtrans_linimp_norm_zv_corr <- function(x) {
+
+  recipe(gwl ~ ., data = x) |>
+    update_role(well_id, new_role = "id") |>
+    # step_lag(contains("previous_week"), lag = seq(7, 7 * 25, 7)) |>
+    # step_impute_linear(contains("lag")) |> 
+    step_log(et, rr, offset = 1E-5) |>
+    step_impute_linear(all_numeric_predictors(), -rr) |>
+    step_normalize(all_numeric_predictors()) |> 
+    step_zv(all_predictors()) |>
+    step_corr(all_numeric_predictors())
+}
+
+make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate <- function(x) {
+
+  recipe(gwl ~ ., data = x) |>
+    step_rm(contains("_lag")) |> 
+    # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
+    update_role(well_id, new_role = "id") |>
+    # step_lag(contains("previous_week"), lag = 1:5) |>
+    step_impute_linear(all_numeric_predictors(), -rr) |>
+    # step_slidify_augment(rr, tg, period = seq(10, 100, by = 10), partial = TRUE, .f = ~ mean(.x), align = "right") |>
+    step_normalize(all_numeric_predictors()) |> 
+    # timetk::step_ts_clean(recipes::all_numeric()) |>
+    # timetk::step_timeseries_signature(date) |>
+    step_zv(all_predictors()) |>
+    step_date(date, features = c("month", "quarter")) |>
+    # embed::step_embed(recipes::all_nominal_predictors()) |> 
+    # step_dummy(all_nominal_predictors(), one_hot = TRUE) |> 
+    # step_impute_linear(all_numeric_predictors()) |> 
+    step_corr(all_numeric_predictors()) |> 
+    # timetk::step_fourier(date, period = 365, K = 5) |> 
+    step_pca(all_numeric_predictors()) |> 
+    step_rm(all_nominal_predictors(), date)
 }
 
 make_tune_grid_xgboost <- function() {
@@ -88,6 +157,28 @@ make_model_grid_svm <- function(tune_grid) {
       f_model_spec = svm_rbf,
       engine_name = "kernlab",
       mode = "regression"
+    )
+}
+
+make_tune_grid_mlp <- function() {
+  grid_regular(
+    hidden_units(),
+    # penalty(),
+    dropout(range = c(1E-3, 0.7)),
+    epochs(),
+    # activation(),
+    learn_rate(),
+    levels = HYPPAR_LEVELS
+  )
+}
+
+make_model_grid_mlp <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = mlp,
+      engine_name = "nnet",
+      mode = "regression"
+      # activation = "relu"
     )
 }
 

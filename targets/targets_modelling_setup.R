@@ -34,18 +34,42 @@ targets_modelling_setup <- list(
     iteration = "list"
   ),
   tar_target(
-    recipe_pure_but_all_standard_predictors,
+    recipe_wolag_logtrans_linimp_norm,
     initial_split |>
       training() |>
-      make_recipe_pure_but_all_standard_predictors(),
+      make_recipe_wolag_logtrans_linimp_norm(),
     pattern = map(initial_split),
     iteration = "list"
   ),
   tar_target(
-    recipe_lag_pca_zv_dateext,
+    recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
     initial_split |>
       training() |>
-      make_recipe_recipe_lag_pca_zv_dateext(),
+      make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca(),
+    pattern = map(initial_split),
+    iteration = "list"
+  ),
+  tar_target(
+    recipe_wolag_logtrans_linimp_norm_zv_corr,
+    initial_split |>
+      training() |>
+      make_recipe_wolag_logtrans_linimp_norm_zv_corr(),
+    pattern = map(initial_split),
+    iteration = "list"
+  ),
+  tar_target(
+    recipe_lag_logtrans_linimp_norm_zv_corr,
+    initial_split |>
+      training() |>
+      make_recipe_lag_logtrans_linimp_norm_zv_corr(),
+    pattern = map(initial_split),
+    iteration = "list"
+  ),
+  tar_target(
+    recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
+    initial_split |>
+      training() |>
+      make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate(),
     pattern = map(initial_split),
     iteration = "list"
   ),
@@ -60,6 +84,15 @@ targets_modelling_setup <- list(
   tar_target(
     model_grid_svm,
     make_model_grid_svm(tune_grid_svm)
+  ),
+  #### mlp
+  tar_target(
+    tune_grid_mlp,
+    make_tune_grid_mlp()
+  ),
+  tar_target(
+    model_grid_mlp,
+    make_model_grid_mlp(tune_grid_mlp)
   ),
   #### xgboost
   tar_target(
@@ -100,19 +133,26 @@ targets_modelling_setup <- list(
     workflow_set,
     make_workflow_set(
       recipes = list(
-        recipe_lag_pca_zv_dateext,
-        recipe_pure_but_all_standard_predictors
+        recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
+        recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
+        recipe_wolag_logtrans_linimp_norm_zv_corr,
+        recipe_lag_logtrans_linimp_norm_zv_corr
       ),
       models = c(
-        # model_automl
-        # model_grid_xgboost$.models
+        # model_grid_xgboost$.models,
+        model_grid_mlp$.models,
+        model_grid_svm$.models,
         model_grid_prophet$.models,
         model_grid_nnetar$.models
       )
-    ),
+    ) |> 
+      filter(!str_detect(wflow_id, "recipe_1_mlp|recipe_3_mlp|recipe_4_mlp")) |> 
+      filter(str_detect(wflow_id, "recipe_1|recipe_3|recipe_4|recipe_2_mlp")),
     pattern = map(
-      recipe_lag_pca_zv_dateext,
-      recipe_pure_but_all_standard_predictors
+      recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
+      recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
+      recipe_wolag_logtrans_linimp_norm_zv_corr,
+      recipe_lag_logtrans_linimp_norm_zv_corr
     ),
     iteration = "list"
   )

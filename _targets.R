@@ -14,9 +14,12 @@ tar_option_set(
     "data.table",
     "doParallel",
     "rlang",
-    "modeltime.gluonts",
+    # "modeltime.gluonts",
     "modeltime",
+    "nnet",
+    # "keras",
     "agua",
+    "timetk",
     "workflowsets",
     "tidymodels",
     "stacks",
@@ -52,6 +55,7 @@ c(
   targets_import,
   targets_preprocessing,
   targets_modelling_setup,
-  targets_modelling_cl
+  targets_modelling_cl,
   # targets_modelling_mt
+  targets_export
 )
