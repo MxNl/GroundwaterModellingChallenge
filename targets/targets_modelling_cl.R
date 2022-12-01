@@ -9,17 +9,25 @@ targets_modelling_cl <- list(
     iteration = "list"
   ),
   tar_target(
-    best_performance_cl,
-    fitted_models_cl |>
-      rank_results(rank_metric = "rsq", select_best = FALSE),
+    fitted_models_cl_success,
+    remove_failed_workflows(
+      fitted_models_cl
+    ),
     pattern = map(fitted_models_cl),
+    iteration = "list"
+  ),
+  tar_target(
+    best_performance_cl,
+    fitted_models_cl_success |>
+      rank_results(rank_metric = "rsq", select_best = FALSE),
+    pattern = map(fitted_models_cl_success),
     iteration = "list"
   ),
   tar_target(
     best_models_selection,
     best_performance_cl |>
-      select_best_models(fitted_models_cl),
-    pattern = map(best_performance_cl, fitted_models_cl),
+      select_best_models(fitted_models_cl_success),
+    pattern = map(best_performance_cl, fitted_models_cl_success),
     iteration = "list"
   ),
   tar_target(
@@ -149,7 +157,6 @@ targets_modelling_cl <- list(
   tar_target(
     plot_results_obs_and_preds_train_test_pred_full,
     make_plot_results_obs_and_preds_train_test_pred_full(
-      # predictions_ensemble_training,
       predictions_ensemble_test,
       predictions_train_test_pred_full
     )

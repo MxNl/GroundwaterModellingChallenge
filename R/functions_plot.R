@@ -190,22 +190,29 @@ make_plot_results_obs_and_preds_train_test_pred_full <- function(test_split, ful
     left_join(date_start_prediction, by = "well_id") |>
     mutate(gwl = if_else(date >= start, NA_real_, gwl)) |>
     ggplot() +
-    geom_ribbon(aes(date, ymin = lb, ymax = ub),
-      fill = "orange", alpha = .5
-    ) +
-    geom_line(aes(date, gwl), colour = "grey50") +
-    geom_line(aes(date, mean), colour = "red") +
+    geom_ribbon(aes(date, ymin = lb, ymax = ub, fill1 = "95% confidence interval"), 
+                alpha = .5
+    ) %>% 
+    relayer::rename_geom_aes(new_aes = c("fill" = "fill1")) +
+    geom_line(aes(date, gwl, colour1 = "Observed")) %>% 
+    relayer::rename_geom_aes(new_aes = c("colour" = "colour1")) +
+    geom_line(aes(date, mean, colour2 = "Predicted")) %>% 
+    relayer::rename_geom_aes(new_aes = c("colour" = "colour2")) +
     geom_vline(
       data = date_start_test,
-      aes(xintercept = start, colour = "Start test split"),
+      aes(xintercept = start, colour3 = "Start test split"),
       linetype = "dashed"
-      ) +
+      ) %>% 
+    relayer::rename_geom_aes(new_aes = c("colour" = "colour3")) +
     geom_vline(
       data = date_start_prediction,
-      aes(xintercept = start, colour = "Start prediction"),
+      aes(xintercept = start, colour3 = "Start prediction"),
       linetype = "dashed"
       ) +
-    scale_colour_manual(values = c("grey60", "grey80"),
+    scale_colour_manual(aesthetics = "fill1", values = c("orange")) +
+    scale_colour_manual(aesthetics = "colour1", values = c("grey50")) +
+    scale_colour_manual(aesthetics = "colour2", values = c("red")) +
+    scale_colour_manual(aesthetics = "colour3", values = c("grey60", "grey80"),
                         guide = guide_legend(reverse = TRUE)) +
     facet_wrap(~well_id, ncol = 1, scales = "free_y") +
     scale_x_date(
@@ -214,6 +221,11 @@ make_plot_results_obs_and_preds_train_test_pred_full <- function(test_split, ful
       expand = c(0, 0)
     ) +
     labs(y = "Groundwater level [m asl]") +
+    guides(
+      colour1 = guide_legend(order = 1),
+      colour2 = guide_legend(order = 2),
+      fill1 = guide_legend(order = 3)
+      ) +
     theme_minimal() +
     theme(
       legend.position = "top",

@@ -8,8 +8,9 @@ make_resampling <- function(x) {
     timetk::time_series_cv(
       date,
       initial = floor(nrow * CV_INITIAL),
-      assess = floor(nrow * CV_ASSESS),
-      skip = floor(nrow * CV_ASSESS),
+      assess = CV_ASSESS,
+      skip = CV_SKIP,
+      slice_limit = CV_SLICE_MAX,
       lag = if_else(str_detect(well_id, "Sweden"), CV_LAG[2], CV_LAG[1]),
       cumulative = TRUE
     )
@@ -312,6 +313,20 @@ tune_resampling <- function(object, resamples) {
   if(ALLOW_PAR) parallel::stopCluster(cl)
   
   return(result)
+}
+
+remove_failed_workflows <- function(x) {
+  wflows_to_remove <- x |>
+    unnest(info) |>
+    pull(result) |>
+    map_lgl(is_tibble) |>
+    magrittr::equals(FALSE) |>
+    which()
+  
+  print(wflows_to_remove)
+
+  x |>
+    filter(!(row_number() %in% wflows_to_remove))
 }
 
 fit_best_model <- function(workflowset, ranked_performances, split) {

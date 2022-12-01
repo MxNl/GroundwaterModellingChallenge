@@ -120,6 +120,21 @@ fitted_models_cl |>
   slice(1) |> 
   pull(note)
 
+test |> 
+  chuck(1) |> 
+  unnest(info) |> 
+  # filter(row_number() == 2105) |> 
+  pull(result) |>
+  map_lgl(is_tibble) |> 
+  magrittr::equals(FALSE) |> 
+  which()
+  magrittr::extract(2104:2106)
+  unnest(result) |> 
+  pull(result)
+  unnest(.notes) |> 
+  slice(1) |> 
+  pull(note)
+
 fitted_models_cl <- tar_read(fitted_models_cl, branches = 1)
 
 fitted_models_cl |> 
@@ -291,10 +306,10 @@ test2 <- test |>
   magrittr::extract(2:6) |>
   map(magrittr::extract2, "data")
   
-test3 <- test |> 
-  magrittr::extract2("member_fits") |> 
-  chuck(1) |> 
-  extract_fit_parsnip()
+# test3 <- test |>
+#   magrittr::extract2("member_fits") |>
+#   chuck(1) |>
+#   extract_fit_parsnip()
 
 
 test2$recipe_1_svm_rbf_629_1_1
@@ -322,7 +337,7 @@ tar_read(predictions_ensemble_test, branches = 1)
 tar_read(data_previous_week_predictors)
 tar_read(data_no_empty_cols) |> map(~.x |> drop_na(gwl))
 tar_read(data_all)
-tar_read(plot_resamplingstrategy, branches = 1)
+tar_read(plot_resamplingstrategy)
 tar_read(plot_results_obs_and_preds)
 tar_read(plot_results_obs_and_preds_wtrain)
 tar_read(plot_results_obs_and_preds_wtrain_full)
@@ -330,12 +345,18 @@ tar_read(plot_results_obs_and_preds_train_test_pred_full)
 tar_read(recipe_wolag_logtrans_linimp_norm_zv_corr)
 tar_read(performance_table) 
 tar_read(performance_table_training)
+test <- tar_read(fitted_models_cl, branches = 1)
+
+
+tar_read(data_train_test_pred_full_repeats, branches = 31:40) |> 
+  chuck(1) |> View()
+
 
 showtext::showtext_opts(dpi = 300)
 {tar_read(plot_results_obs_and_preds_train_test_pred_full) +
   theme(text = element_text(size = 16))} |> 
   ggplot2::ggsave(
-    filename = "data_submission/plot_results_obs_and_preds_train_test_pred_full.pdf", device = "pdf",
+    filename = "data_submission/plot_results_obs_and_preds_train_test_pred_full2.pdf", device = "pdf",
     scale = 3, units = "cm", width = 18, height = 12, dpi = 300
   )
 showtext::showtext_opts(dpi = 96)
@@ -572,8 +593,11 @@ tar_read(data, branches = 3) |>
   chuck(3) |>
   filter(date >= lubridate::ymd("2000-12-20")) |> View()
 
-tar_read(data, branches = 3) |> 
-  chuck(3) |>
+tar_read(data_native_gwl_interval, branches = 3) |> 
+  chuck(3) |> View()
+
+tar_read(data, branches = 4) |> 
+  chuck(4) |> View()
   filter(date >= lubridate::ymd("2000-12-20")) |>
   mutate(date_orig = date, .after = date) |> 
   # summarise(
@@ -591,7 +615,8 @@ tar_read(data, branches = 3) |>
   print(n = 20) |> 
   View()
 
-
+tar_read(data_train_test_pred_full_repeats, branches = 31:40) |> 
+  chuck(1) |> View()
 
 make_targets_runtime_table <-
   function() {
@@ -624,7 +649,21 @@ make_targets_runtime_table <-
 make_targets_runtime_table() |> 
   filter()
 
-tar_meta(targets_only = TRUE) |>  View()
+tar_meta(targets_only = TRUE) |>
+  filter(time >= lubridate::ymd("2022-11-23")) |> 
+  select(name, type, bytes, seconds, parent, command, depend) |>
+  drop_na(parent) |> 
+  mutate(target_group = str_c(command))
+  group_by(target_group) %>%
+  mutate(pattern_groups = 1:n()) |>
+  summarise(max = max(pattern_groups)) %>%
+  print(n = nrow(.))
+  mutate(target_groups = if_else(
+    n() > 5,
+    rep(1:(n() / 5), each = (n() / 5)),
+    row_number()
+  ))
+  
   arrange(-seconds) |> mutate(seconds = seconds / 60 / 60) |>  View()
 
   
