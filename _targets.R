@@ -30,6 +30,8 @@ tar_option_set(
   garbage_collection = TRUE
 )
 
+tar_seed(42)
+
 # library(showtext)
 # Add font for ggplots
 # font_add("Corbel", regular = "C:\\Windows\\Fonts\\corbel.ttf")

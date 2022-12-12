@@ -16,6 +16,12 @@ make_resampling <- function(x) {
     )
 }
 
+make_resampling_cv <- function(x) {
+  
+  x |>
+    vfold_cv(REG_CV_FOLDS, strata = gwl, breaks = 5)
+}
+
 summarise_by_week <- function(x) {
   x %>%
     summarise_by_time(.date_var = date, .by = "week")

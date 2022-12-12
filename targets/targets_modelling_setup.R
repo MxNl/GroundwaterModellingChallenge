@@ -15,6 +15,14 @@ targets_modelling_setup <- list(
     iteration = "list"
   ),
   tar_target(
+    resampling_cv,
+    initial_split |>
+      training() |>
+      make_resampling_cv(),
+    pattern = map(initial_split),
+    iteration = "list"
+  ),
+  tar_target(
     plot_resamplingstrategy,
     resampling |>
       timetk::tk_time_series_cv_plan() |>

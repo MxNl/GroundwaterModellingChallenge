@@ -353,6 +353,25 @@ tar_read(performance_table)
 test <- tar_read(fitted_models_cl, branches = 1)
 
 
+tar_read(predictions_train_test_pred_full, branches = 1) |> 
+  chuck(1) |>
+  ggplot(aes(date, .pred)) +
+  geom_line()
+  pull(.pred) |> 
+  range()
+
+left_join(tar_read(performance_table_training), tar_read(performance_table), by = "well_id") |> 
+  readr::write_rds("performace_table")
+
+
+test_plot <- make_plot_results_obs_and_preds_train_test_pred_full(
+  tar_read(predictions_ensemble_test),
+  tar_read(predictions_train_test_pred_full)
+)
+
+test_plot +
+  coord_cartesian(ylim = c(372.5, 378))
+
 tar_read(data_train_test_pred_full_repeats, branches = 31:40) |> 
   chuck(1) |> View()
 

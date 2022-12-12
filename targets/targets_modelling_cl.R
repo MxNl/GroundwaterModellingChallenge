@@ -1,11 +1,28 @@
 targets_modelling_cl <- list(
   tar_target(
-    fitted_models_cl,
+    fitted_models_seq_cl,
     tune_resampling(
-      workflow_set,
+      workflow_set |> 
+        filter(str_detect(wflow_id, "_nnetar_")),
       resampling
     ),
     pattern = map(workflow_set, resampling),
+    iteration = "list"
+  ),
+  tar_target(
+    fitted_models_nonseq_cl,
+    tune_resampling(
+      workflow_set |> 
+        filter(!str_detect(wflow_id, "_nnetar_")),
+      resampling_cv
+    ),
+    pattern = map(workflow_set, resampling_cv),
+    iteration = "list"
+  ),
+  tar_target(
+    fitted_models_cl,
+    bind_rows(fitted_models_seq_cl, fitted_models_nonseq_cl),
+    pattern = map(fitted_models_seq_cl, fitted_models_nonseq_cl),
     iteration = "list"
   ),
   tar_target(
