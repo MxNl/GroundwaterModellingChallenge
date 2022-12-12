@@ -21,6 +21,7 @@ tar_option_set(
     "agua",
     "timetk",
     "workflowsets",
+    "embed",
     "tidymodels",
     "stacks",
     "tidyverse"

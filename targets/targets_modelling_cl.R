@@ -9,25 +9,17 @@ targets_modelling_cl <- list(
     iteration = "list"
   ),
   tar_target(
-    fitted_models_cl_success,
-    remove_failed_workflows(
-      fitted_models_cl
-    ),
-    pattern = map(fitted_models_cl),
-    iteration = "list"
-  ),
-  tar_target(
     best_performance_cl,
-    fitted_models_cl_success |>
+    fitted_models_cl |>
       rank_results(rank_metric = "rsq", select_best = FALSE),
-    pattern = map(fitted_models_cl_success),
+    pattern = map(fitted_models_cl),
     iteration = "list"
   ),
   tar_target(
     best_models_selection,
     best_performance_cl |>
-      select_best_models(fitted_models_cl_success),
-    pattern = map(best_performance_cl, fitted_models_cl_success),
+      select_best_models(fitted_models_cl),
+    pattern = map(best_performance_cl, fitted_models_cl),
     iteration = "list"
   ),
   tar_target(
@@ -44,7 +36,7 @@ targets_modelling_cl <- list(
     iteration = "list"
   ),
 
-# Repititions -------------------------------------------------------------
+# Repetitions -------------------------------------------------------------
 
   tar_target(
     fit_repeats,
@@ -167,6 +159,7 @@ targets_modelling_cl <- list(
   ),
   tar_target(
     performance_table_training,
-    make_performance_table(predictions_ensemble_training)
+    make_performance_table(predictions_ensemble_training),
+    priority = 1
   )
 )

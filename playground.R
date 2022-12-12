@@ -152,9 +152,12 @@ fitted_models_cl |>
 
 "A correlation computation is required, but `estimate` is constant and has 0 standard deviation, resulting in a divide by 0 error. `NA` will be returned."
 
-test <- tar_read(recipe_wolag_logtrans_linimp_norm) |>
-  map(prep) |> 
-  map(juice)
+test <- tar_read(recipe_lag_logtrans_linimp_norm_zv_corr_umap, branches = 1) |> 
+  purrr::chuck(1) |>
+  prep() |> 
+  juice()
+  purrr::map(recipes::prep) |> 
+  purrr::map(juice)
 
 test |> 
   map(
@@ -311,6 +314,7 @@ test2 <- test |>
 #   chuck(1) |>
 #   extract_fit_parsnip()
 
+tar_read(predictions_train_test_pred_full) |> 
 
 test2$recipe_1_svm_rbf_629_1_1
 
@@ -342,9 +346,10 @@ tar_read(plot_results_obs_and_preds)
 tar_read(plot_results_obs_and_preds_wtrain)
 tar_read(plot_results_obs_and_preds_wtrain_full)
 tar_read(plot_results_obs_and_preds_train_test_pred_full)
+tar_read(plot_results_obs_and_preds_train_test_pred_full) |> plotly::ggplotly()
 tar_read(recipe_wolag_logtrans_linimp_norm_zv_corr)
-tar_read(performance_table) 
 tar_read(performance_table_training)
+tar_read(performance_table) 
 test <- tar_read(fitted_models_cl, branches = 1)
 
 

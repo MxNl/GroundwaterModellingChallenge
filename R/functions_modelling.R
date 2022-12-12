@@ -104,6 +104,20 @@ make_recipe_lag_logtrans_linimp_norm_zv_corr <- function(x) {
     step_corr(all_numeric_predictors())
 }
 
+make_recipe_lag_logtrans_linimp_norm_zv_corr_pca <- function(x) {
+
+  recipe(gwl ~ ., data = x) |>
+    update_role(well_id, new_role = "id") |>
+    # step_lag(contains("previous_week"), lag = seq(7, 7 * 25, 7)) |>
+    # step_impute_linear(contains("lag")) |> 
+    step_log(et, rr, offset = 1E-5) |>
+    step_impute_linear(all_numeric_predictors(), -rr) |>
+    step_normalize(all_numeric_predictors()) |> 
+    step_zv(all_predictors()) |>
+    step_corr(all_numeric_predictors()) |> 
+    step_pca(all_numeric_predictors())
+}
+
 make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate <- function(x) {
 
   recipe(gwl ~ ., data = x) |>

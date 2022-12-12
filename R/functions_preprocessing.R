@@ -14,17 +14,17 @@ aggregated_predictors <- function(.data) {
   .data |>
     mutate(
       across(
-        all_of(c("tn")),
+        all_of(c("tn", "et")),
         data.table::frollmean, n = 7, align = "right",
         .names = '{.col}_previous_week_mean'
       ),
       across(
-        all_of(c("tn")),
+        all_of(c("tn", "et")),
         data.table::frollmean, n = 7*4, align = "right",
         .names = '{.col}_previous_month_mean'
       ),
       across(
-        all_of(c("tn")),
+        all_of(c("tn", "et")),
         data.table::frollmean, n = 7*4*3, align = "right",
         .names = '{.col}_previous_quarteryear_mean'
       ),
@@ -37,7 +37,7 @@ aggregated_predictors <- function(.data) {
 add_lagged_predictors <- function(x, lags) {
   x |>
     timetk::tk_augment_lags(
-      contains("previous_week"),
+      contains(c("rr_previous_week", "et_previous_week_")),
       .lags = lags
     )
 }
