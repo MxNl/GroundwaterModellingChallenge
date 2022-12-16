@@ -2,22 +2,27 @@ targets_modelling_cl <- list(
   tar_target(
     fitted_models_seq_cl,
     tune_resampling(
-      workflow_set |> 
+      workflow_set_seq |> 
         filter(str_detect(wflow_id, "_nnetar_")),
       resampling
     ),
-    pattern = map(workflow_set, resampling),
+    pattern = map(workflow_set_seq, resampling),
     iteration = "list"
   ),
   tar_target(
     fitted_models_nonseq_cl,
     tune_resampling(
-      workflow_set |> 
+      workflow_set_nonseq |> 
         filter(!str_detect(wflow_id, "_nnetar_")),
       resampling_cv
     ),
-    pattern = map(workflow_set, resampling_cv),
+    pattern = map(workflow_set_nonseq, resampling_cv),
     iteration = "list"
+  ),
+  tar_target(
+    random,
+    runif(10),
+    cue = tar_cue("always")
   ),
   tar_target(
     fitted_models_cl,
@@ -25,24 +30,53 @@ targets_modelling_cl <- list(
     pattern = map(fitted_models_seq_cl, fitted_models_nonseq_cl),
     iteration = "list"
   ),
+  # tar_target(
+  #   best_performance_cl,
+  #   fitted_models_cl |>
+  #     rank_results(rank_metric = "rsq", select_best = FALSE),
+  #   pattern = map(fitted_models_cl),
+  #   iteration = "list"
+  # ),
   tar_target(
-    best_performance_cl,
-    fitted_models_cl |>
+    best_performance_seq_cl,
+    fitted_models_seq_cl |>
       rank_results(rank_metric = "rsq", select_best = FALSE),
-    pattern = map(fitted_models_cl),
+    pattern = map(fitted_models_seq_cl),
     iteration = "list"
   ),
   tar_target(
-    best_models_selection,
-    best_performance_cl |>
-      select_best_models(fitted_models_cl),
-    pattern = map(best_performance_cl, fitted_models_cl),
+    best_performance_nonseq_cl,
+    fitted_models_nonseq_cl |>
+      rank_results(rank_metric = "rsq", select_best = FALSE),
+    pattern = map(fitted_models_nonseq_cl),
+    iteration = "list"
+  ),
+  # tar_target(
+  #   best_performance_cl,
+  #   bind_rows(best_performance_seq_cl, best_performance_nonseq_cl),
+  #   pattern = map(best_performance_seq_cl, best_performance_nonseq_cl),
+  #   iteration = "list"
+  # ),
+  tar_target(
+    best_models_selection_seq,
+    best_performance_seq_cl |>
+      select_best_models(fitted_models_seq_cl),
+    pattern = map(best_performance_seq_cl, fitted_models_seq_cl),
+    iteration = "list"
+  ),
+  tar_target(
+    best_models_selection_nonseq,
+    best_performance_nonseq_cl |>
+      select_best_models(fitted_models_nonseq_cl),
+    pattern = map(best_performance_nonseq_cl, fitted_models_nonseq_cl),
     iteration = "list"
   ),
   tar_target(
     model_ensemble,
-    stacks() |> stacks::add_candidates(best_models_selection),
-    pattern = map(best_models_selection),
+    stacks() |> 
+      stacks::add_candidates(best_models_selection_seq) |> 
+      stacks::add_candidates(best_models_selection_nonseq),
+    pattern = map(best_models_selection_seq, best_models_selection_nonseq),
     iteration = "list"
   ),
   tar_target(
@@ -57,7 +91,7 @@ targets_modelling_cl <- list(
 
   tar_target(
     fit_repeats,
-    1:10
+    1:REPEATS
   ),
   tar_target(
     fitted_ensemble,

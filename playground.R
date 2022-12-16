@@ -351,9 +351,46 @@ tar_read(recipe_wolag_logtrans_linimp_norm_zv_corr)
 tar_read(performance_table_training)
 tar_read(performance_table) 
 test <- tar_read(fitted_models_cl, branches = 1)
+test2 <- tar_read(fitted_models_seq_cl, branches = 1)
+test3 <- tar_read(fitted_models_nonseq_cl, branches = 1)
+
+library(tune)
+library(workflowsets)
+
+test |>
+  purrr::chuck(1) |>
+  # filter(wflow_id %in% test2_names) |> 
+  collect_metrics()
+  # slice(1) |> 
+  dplyr::mutate(wflow_id = stringr::word(wflow_id, 1, 3, sep = "_")) |> 
+  dplyr::distinct(wflow_id) |> 
+  dplyr::arrange()
+  # workflowsets:::pick_metric()  
+
+test_bind <- test2 |>
+  purrr::chuck(1) |> 
+  # slice_head(n = 3) |> 
+  dplyr::bind_rows(purrr::chuck(test3, 1)) |> 
+  # pull(wflow_id)
+  # dplyr::slice_sample(n = 1) |>
+  workflowsets::collect_metrics()
+
+test2 |>
+  purrr::chuck(1) |> 
+  # filter(wflow_id %in% test2_names) |> 
+  # dplyr::slice_sample(n = 1) |>
+  collect_metrics()
+
+test3 |>
+  purrr::chuck(1) |> 
+  # filter(wflow_id %in% test2_names) |> 
+  # dplyr::slice_sample(n = 1) |>
+  collect_metrics()
 
 
-tar_read(predictions_train_test_pred_full, branches = 1) |> 
+  rank_results()
+
+testtar_read(predictions_train_test_pred_full, branches = 1) |> 
   chuck(1) |>
   ggplot(aes(date, .pred)) +
   geom_line()

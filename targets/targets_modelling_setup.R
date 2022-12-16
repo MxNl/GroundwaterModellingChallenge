@@ -146,7 +146,28 @@ targets_modelling_setup <- list(
   # Workflow ----------------------------------------------------------------
 
   tar_target(
-    workflow_set,
+    workflow_set_seq,
+    make_workflow_set(
+      recipes = list(
+        recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
+        recipe_wolag_logtrans_linimp_norm_zv_corr,
+        recipe_lag_logtrans_linimp_norm_zv_corr,
+        recipe_lag_logtrans_linimp_norm_zv_corr_pca),
+      models = c(
+        # model_grid_xgboost$.models,
+        model_grid_prophet$.models,
+        model_grid_nnetar$.models
+      )
+    ),
+    pattern = map(
+      recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
+      recipe_wolag_logtrans_linimp_norm_zv_corr,
+      recipe_lag_logtrans_linimp_norm_zv_corr,
+      recipe_lag_logtrans_linimp_norm_zv_corr_pca),
+    iteration = "list"
+  ),
+  tar_target(
+    workflow_set_nonseq,
     make_workflow_set(
       recipes = list(
         recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
@@ -157,9 +178,7 @@ targets_modelling_setup <- list(
       models = c(
         # model_grid_xgboost$.models,
         model_grid_mlp$.models,
-        model_grid_svm$.models,
-        model_grid_prophet$.models,
-        model_grid_nnetar$.models
+        model_grid_svm$.models
       )
     ) |> 
       filter(!str_detect(wflow_id, "recipe_1_mlp|recipe_3_mlp|recipe_4_mlp|recipe_5_mlp")) |> 
