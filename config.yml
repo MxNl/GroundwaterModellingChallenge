@@ -12,6 +12,7 @@ cv_assess: 24 months
 cv_skip: 12 months
 cv_lag: 365, 52
 cv_slice_max: 4
+reg_cv_folds: 5
 repeats: 2
 
 # Parallel

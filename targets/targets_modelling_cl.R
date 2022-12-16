@@ -3,9 +3,9 @@ targets_modelling_cl <- list(
     fitted_models_cl,
     tune_resampling(
       workflow_set,
-      resampling
+      resampling_cv
     ),
-    pattern = map(workflow_set, resampling),
+    pattern = map(workflow_set, resampling_cv),
     iteration = "list"
   ),
   tar_target(
