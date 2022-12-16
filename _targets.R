@@ -51,6 +51,8 @@ here::here(path_targets) |>
 
 if(PARALLEL) plan(multisession)
 
+tar_seed()
+
 # Define targets
 c(
   targets_import,

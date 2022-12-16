@@ -146,7 +146,7 @@ make_tune_grid_xgboost <- function() {
     learn_rate(),
     tree_depth(),
     loss_reduction(),
-    levels = 8
+    levels = HYPPAR_LEVELS
   )
 }
 
@@ -162,7 +162,7 @@ make_model_grid_xgboost <- function(tune_grid) {
 make_tune_grid_svm <- function() {
   grid_regular(
     rbf_sigma(),
-    levels = 5
+    levels = HYPPAR_LEVELS
   )
 }
 

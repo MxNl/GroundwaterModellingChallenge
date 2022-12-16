@@ -40,7 +40,7 @@ targets_modelling_cl <- list(
 
   tar_target(
     fit_repeats,
-    1:10
+    1:REPEATS
   ),
   tar_target(
     fitted_ensemble,

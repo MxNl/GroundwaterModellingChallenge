@@ -12,11 +12,12 @@ cv_assess: 24 months
 cv_skip: 12 months
 cv_lag: 365, 52
 cv_slice_max: 4
+repeats: 2
 
 # Parallel
 allow_par: TRUE
 cores: 30
 
 # Tuning
-hyppar_combinations: 5
-hyppar_levels: 5
+hyppar_combinations: 2
+hyppar_levels: 2

@@ -147,11 +147,11 @@ targets_modelling_setup <- list(
         recipe_lag_logtrans_linimp_norm_zv_corr,
         recipe_lag_logtrans_linimp_norm_zv_corr_pca),
       models = c(
-        # model_grid_xgboost$.models,
+        model_grid_xgboost$.models,
         model_grid_mlp$.models,
-        model_grid_svm$.models,
-        model_grid_prophet$.models,
-        model_grid_nnetar$.models
+        model_grid_svm$.models
+        # model_grid_prophet$.models,
+        # model_grid_nnetar$.models
       )
     ) |> 
       filter(!str_detect(wflow_id, "recipe_1_mlp|recipe_3_mlp|recipe_4_mlp|recipe_5_mlp")) |> 
