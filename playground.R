@@ -110,8 +110,7 @@ tar_read(predictions_ensemble_test) |>
   arrange(-nse)
 
 fitted_models_cl <- tar_read(fitted_models_cl, branches = 1) |> 
-  chuck(1) |> 
-  arrange()
+  purrr::chuck(1)
 
 fitted_models_cl |> 
   unnest(info) |> 
@@ -342,6 +341,8 @@ tar_read(data_previous_week_predictors)
 tar_read(data_no_empty_cols) |> map(~.x |> drop_na(gwl))
 tar_read(data_all)
 tar_read(plot_resamplingstrategy)
+tar_read(recipe_wolag_logtrans_linimp_norm, branches = 1) |> chuck(1) |> prep() |> juice() |>  select(date)
+tar_read(recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca, branches = 1) |> chuck(1) |> prep() |> juice() |>  select(date)
 tar_read(plot_results_obs_and_preds)
 tar_read(plot_results_obs_and_preds_wtrain)
 tar_read(plot_results_obs_and_preds_wtrain_full)

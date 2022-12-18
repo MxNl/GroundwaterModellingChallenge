@@ -101,6 +101,15 @@ targets_modelling_setup <- list(
     model_grid_svm,
     make_model_grid_svm(tune_grid_svm)
   ),
+  #### svmpoly
+  tar_target(
+    tune_grid_svmpoly,
+    make_tune_grid_svmpoly()
+  ),
+  tar_target(
+    model_grid_svmpoly,
+    make_model_grid_svmpoly(tune_grid_svmpoly)
+  ),
   #### mlp
   tar_target(
     tune_grid_mlp,
@@ -150,23 +159,24 @@ targets_modelling_setup <- list(
     make_workflow_set(
       recipes = list(
         recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
-        recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
+        # recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
         recipe_wolag_logtrans_linimp_norm_zv_corr,
         recipe_lag_logtrans_linimp_norm_zv_corr,
         recipe_lag_logtrans_linimp_norm_zv_corr_pca),
       models = c(
         model_grid_xgboost$.models,
         model_grid_mlp$.models,
-        model_grid_svm$.models
+        model_grid_svm$.models,
+        model_grid_svmpoly$.models
         # model_grid_prophet$.models,
         # model_grid_nnetar$.models
       )
-    ) |> 
-      filter(!str_detect(wflow_id, "recipe_1_mlp|recipe_3_mlp|recipe_4_mlp|recipe_5_mlp")) |> 
-      filter(str_detect(wflow_id, "recipe_1|recipe_3|recipe_4|recipe_5|recipe_2_mlp")),
+    ),
+      # filter(!str_detect(wflow_id, "recipe_1_mlp|recipe_3_mlp|recipe_4_mlp|recipe_5_mlp")) |> 
+      # filter(str_detect(wflow_id, "recipe_1|recipe_3|recipe_4|recipe_5|recipe_2_mlp")),
     pattern = map(
       recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
-      recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
+      # recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,
       recipe_wolag_logtrans_linimp_norm_zv_corr,
       recipe_lag_logtrans_linimp_norm_zv_corr,
       recipe_lag_logtrans_linimp_norm_zv_corr_pca),

@@ -20,5 +20,5 @@ allow_par: TRUE
 cores: 30
 
 # Tuning
-hyppar_combinations: 2
-hyppar_levels: 2
+hyppar_combinations: 5
+hyppar_levels: 5

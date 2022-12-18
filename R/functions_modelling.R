@@ -43,7 +43,9 @@ make_recipe_wolag_logtrans_linimp_norm <- function(x) {
     # timetk::step_ts_impute(all_numeric_predictors()) |> 
     # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
     step_normalize(all_numeric_predictors()) |> 
-    update_role(well_id, new_role = "id") 
+    update_role(well_id, new_role = "id")  |> 
+    step_rm(date) |>
+    step_dummy(all_nominal_predictors(), one_hot = TRUE)
     # step_lag(contains("previous_week"), lag = 1:5) |>
     # timetk::step_ts_clean(all_numeric()) |>
     # timetk::step_timeseries_signature(date) |>
@@ -80,7 +82,9 @@ make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca <- function(x) {
     # step_impute_linear(all_numeric_predictors()) |> 
     step_corr(all_numeric_predictors()) |> 
     # timetk::step_fourier(date, period = 365, K = 5) |> 
-    step_pca(all_numeric_predictors())
+    step_pca(all_numeric_predictors()) |> 
+    step_rm(date) |>
+    step_dummy(all_nominal_predictors(), one_hot = TRUE)
 }
 
 make_recipe_wolag_logtrans_linimp_norm_zv_corr <- function(x) {
@@ -94,7 +98,9 @@ make_recipe_wolag_logtrans_linimp_norm_zv_corr <- function(x) {
     step_impute_linear(all_numeric_predictors(), -rr) |>
     step_normalize(all_numeric_predictors()) |> 
     step_zv(all_predictors()) |>
-    step_corr(all_numeric_predictors())
+    step_corr(all_numeric_predictors()) |> 
+    step_rm(date) |>
+    step_dummy(all_nominal_predictors(), one_hot = TRUE)
 }
 
 make_recipe_lag_logtrans_linimp_norm_zv_corr <- function(x) {
@@ -107,7 +113,9 @@ make_recipe_lag_logtrans_linimp_norm_zv_corr <- function(x) {
     step_impute_linear(all_numeric_predictors(), -rr) |>
     step_normalize(all_numeric_predictors()) |> 
     step_zv(all_predictors()) |>
-    step_corr(all_numeric_predictors())
+    step_corr(all_numeric_predictors()) |> 
+    step_rm(date) |>
+    step_dummy(all_nominal_predictors(), one_hot = TRUE)
 }
 
 make_recipe_lag_logtrans_linimp_norm_zv_corr_pca <- function(x) {
@@ -121,7 +129,9 @@ make_recipe_lag_logtrans_linimp_norm_zv_corr_pca <- function(x) {
     step_normalize(all_numeric_predictors()) |> 
     step_zv(all_predictors()) |>
     step_corr(all_numeric_predictors()) |> 
-    step_pca(all_numeric_predictors())
+    step_pca(all_numeric_predictors()) |> 
+    step_rm(date) |>
+    step_dummy(all_nominal_predictors(), one_hot = TRUE)
 }
 
 make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate <- function(x) {
@@ -144,14 +154,17 @@ make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate <- function(x
     step_corr(all_numeric_predictors()) |> 
     # timetk::step_fourier(date, period = 365, K = 5) |> 
     step_pca(all_numeric_predictors()) |> 
-    step_rm(all_nominal_predictors(), date)
+    step_rm(all_nominal_predictors(), date) |> 
+    step_dummy(all_nominal_predictors(), one_hot = TRUE)
 }
 
 make_tune_grid_xgboost <- function() {
   grid_regular(
+    trees(),
+    min_n(),
+    loss_reduction(),
     learn_rate(),
     tree_depth(),
-    loss_reduction(),
     levels = HYPPAR_LEVELS
   )
 }
@@ -168,11 +181,32 @@ make_model_grid_xgboost <- function(tune_grid) {
 make_tune_grid_svm <- function() {
   grid_regular(
     rbf_sigma(),
+    cost(),
+    svm_margin(),
     levels = HYPPAR_LEVELS
   )
 }
 
 make_model_grid_svm <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = svm_rbf,
+      engine_name = "kernlab",
+      mode = "regression"
+    )
+}
+
+make_tune_grid_svmpoly <- function() {
+  grid_regular(
+    # degree(),
+    cost(),
+    # scale_factor(),
+    svm_margin(),
+    levels = HYPPAR_LEVELS
+  )
+}
+
+make_model_grid_svmpoly <- function(tune_grid) {
   tune_grid |>
     create_model_grid(
       f_model_spec = svm_rbf,
