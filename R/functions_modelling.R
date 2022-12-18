@@ -218,10 +218,10 @@ make_model_grid_svmpoly <- function(tune_grid) {
 make_tune_grid_mlp <- function() {
   grid_regular(
     hidden_units(),
-    # penalty(),
+    penalty(),
     dropout(range = c(1E-3, 0.7)),
     epochs(),
-    # activation(),
+    activation(),
     learn_rate(),
     levels = HYPPAR_LEVELS
   )
