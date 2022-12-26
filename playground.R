@@ -334,6 +334,13 @@ tar_read(initial_split, branches = 1) |>
   chuck(1) |> 
   testing()
 
+test <- tar_read(fitted_models_cl, branches = 5) |> 
+  chuck(1)
+
+test |> 
+  filter(str_detect(member, "recipe_3_rand_forest_11_1_1"))
+
+
 tar_read(blended_ensemble)
 tar_read(resampling, branches = 1)
 tar_read(predictions_ensemble_test, branches = 1)
@@ -351,6 +358,7 @@ tar_read(plot_results_obs_and_preds_train_test_pred_full) |> plotly::ggplotly()
 tar_read(recipe_wolag_logtrans_linimp_norm_zv_corr)
 tar_read(performance_table_training)
 tar_read(performance_table) 
+tar_read(fitted_ensemble)
 test <- tar_read(fitted_models_cl, branches = 1)
 
 

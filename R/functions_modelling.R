@@ -17,9 +17,12 @@ make_resampling <- function(x) {
 }
 
 make_resampling_cv <- function(x) {
-  
   x |>
-    vfold_cv(REG_CV_FOLDS, strata = gwl, breaks = 5)
+    vfold_cv(
+      REG_CV_FOLDS,
+      strata = gwl, breaks = 5,
+      repeats = REG_CV_REPEATS
+    )
 }
 
 summarise_by_week <- function(x) {
@@ -69,6 +72,7 @@ make_recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca <- function(x) {
     # step_rm(any_of(c("tn", "tx", "pp", "hu", "fg", "qq", "et", "prcp", "tmax", "tmin", "stage_m", "et_2"))) |>
     update_role(well_id, new_role = "id") |>
     # step_lag(contains("previous_week"), lag = 1:5) |>
+    step_rm(contains("_lag")) |> 
     step_log(et, rr, offset = 1E-5) |>
     step_impute_linear(all_numeric_predictors(), -rr) |>
     # step_slidify_augment(rr, tg, period = seq(10, 100, by = 10), partial = TRUE, .f = ~ mean(.x), align = "right") |>
@@ -92,6 +96,7 @@ make_recipe_wolag_logtrans_linimp_norm_zv_corr <- function(x) {
   recipe(gwl ~ ., data = x) |>
     step_rm(contains("_lag")) |> 
     update_role(well_id, new_role = "id") |>
+    step_rm(contains("_lag")) |> 
     # step_lag(contains("previous_week"), lag = seq(7, 7 * 25, 7)) |>
     # step_impute_linear(contains("lag")) |> 
     step_log(et, rr, offset = 1E-5) |>
@@ -122,7 +127,7 @@ make_recipe_lag_logtrans_linimp_norm_zv_corr_pca <- function(x) {
 
   recipe(gwl ~ ., data = x) |>
     update_role(well_id, new_role = "id") |>
-    # step_lag(contains("previous_week"), lag = seq(7, 7 * 25, 7)) |>
+    # step_lagui8(contains("previous_week"), lag = seq(7, 7 * 25, 7)) |>
     # step_impute_linear(contains("lag")) |> 
     step_log(et, rr, offset = 1E-5) |>
     step_impute_linear(all_numeric_predictors(), -rr) |>
@@ -217,12 +222,12 @@ make_model_grid_svmpoly <- function(tune_grid) {
 
 make_tune_grid_mlp <- function() {
   grid_regular(
-    hidden_units(),
+     hidden_units(),
     penalty(),
-    dropout(range = c(1E-3, 0.7)),
+    # dropout(range = c(1E-3, 0.7)),
     epochs(),
-    activation(),
-    learn_rate(),
+    # activation(),
+    # learn_rate(),
     levels = HYPPAR_LEVELS
   )
 }
@@ -232,6 +237,47 @@ make_model_grid_mlp <- function(tune_grid) {
     create_model_grid(
       f_model_spec = mlp,
       engine_name = "nnet",
+      mode = "regression"
+      # activation = "relu"
+    )
+}
+
+make_tune_grid_boosttree <- function() {
+  grid_regular(
+    tree_depth(),
+    trees(),
+    # mtry(c(1:20)),
+    loss_reduction(),
+    min_n(),
+    learn_rate(),
+    levels = HYPPAR_LEVELS
+  )
+}
+
+make_model_grid_boosttree <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = boost_tree,
+      engine_name = "xgboost",
+      mode = "regression"
+      # activation = "relu"
+    )
+}
+
+make_tune_grid_rf <- function() {
+  grid_regular(
+    trees(c(300L, 2000L)),
+    mtry = mtry_prop(),
+    min_n(),
+    levels = HYPPAR_LEVELS
+  )
+}
+
+make_model_grid_rf <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = rand_forest,
+      engine_name = "ranger",
       mode = "regression"
       # activation = "relu"
     )

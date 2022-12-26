@@ -2,7 +2,7 @@
 parallel: FALSE
 
 # Scope
-single_well: FALSE
+single_well: TRUE
 single_well_site: 1
 
 # Testing and Resampling
@@ -13,6 +13,7 @@ cv_skip: 12 months
 cv_lag: 365, 52
 cv_slice_max: 4
 reg_cv_folds: 5
+reg_cv_repeats: 1
 repeats: 2
 
 # Parallel
