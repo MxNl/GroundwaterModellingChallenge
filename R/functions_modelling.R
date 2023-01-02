@@ -266,7 +266,7 @@ make_model_grid_boosttree <- function(tune_grid) {
 
 make_tune_grid_rf <- function() {
   grid_regular(
-    trees(c(300L, 2000L)),
+    trees(c(500L, 4000L)),
     mtry = mtry_prop(),
     min_n(),
     levels = HYPPAR_LEVELS

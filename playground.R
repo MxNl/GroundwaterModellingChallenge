@@ -361,6 +361,31 @@ tar_read(performance_table)
 tar_read(fitted_ensemble)
 test <- tar_read(fitted_models_cl, branches = 1)
 
+library(targets)
+library(tidyverse)
+library(tidymodels)
+
+test |> 
+  purrr::chuck(1) |> 
+  # rank_results() |> select(wflow_id)
+  # unnest(info) |> 
+  # filter(wflow_id == "recipe_2_svm_rbf_26") |> 
+  extract_workflow(id = "recipe_2_rand_forest_2")
+  extract_workflow_set_result(id = "recipe_2_svm_rbf_26") |> 
+  unnest(.predictions)
+  select(id, .extracts) %>% 
+  unnest(cols = .extracts)
+  # slice_head(n = 1)
+  extract_parameter_set_dials(id = "recipe_2_svm_rbf_26")
+  # slice_sample(n = 1) |> 
+  extract_workflow_set_result() |> 
+  select_best(metric = "rmse")
+  unnest(.predictions) |> 
+  mutate(row = row_number()) |> 
+  ggplot() +
+  geom_line(aes(row, y = gwl)) +
+  geom_line(aes(row, y = .pred), colour = "red")
+  
 
 tar_read(data_train_test_pred_full_repeats, branches = 31:40) |> 
   chuck(1) |> View()
