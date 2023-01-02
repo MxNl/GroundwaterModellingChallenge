@@ -275,6 +275,26 @@ make_model_grid_nnetar <- function(tune_grid) {
     )
 }
 
+make_tune_grid_gluontslstm <- function() {
+  grid_regular(
+    # non_seasonal_ar(range = c(1L, 5L)),
+    # seasonal_ar(range = c(1L, 5L)),
+    hidden_units(),
+    penalty(),
+    epochs(),
+    levels = HYPPAR_LEVELS
+  )
+}
+
+make_model_grid_gluontslstm <- function(tune_grid) {
+  tune_grid |>
+    create_model_grid(
+      f_model_spec = modeltime.gluonts::lst(),
+      engine_name = "nnetar",
+      mode = "regression"
+    )
+}
+
 make_model_automl <- function() {
   # agua::h2o_start()
   

@@ -146,6 +146,15 @@ targets_modelling_setup <- list(
     model_grid_nnetar,
     make_model_grid_nnetar(tune_grid_nnetar)
   ),
+  #### gluonts
+  tar_target(
+    tune_grid_gluontslstm,
+    make_tune_grid_gluontslstm()
+  ),
+  tar_target(
+    model_grid_gluontslstm,
+    make_model_grid_gluontslstm(tune_grid_gluontslstm)
+  ),
   #### automl
   tar_target(
     model_automl,
