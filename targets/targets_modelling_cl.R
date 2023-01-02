@@ -3,15 +3,15 @@ targets_modelling_cl <- list(
     fitted_models_cl,
     tune_resampling(
       workflow_set,
-      resampling_cv
+      resampling
     ),
-    pattern = map(workflow_set, resampling_cv),
+    pattern = map(workflow_set, resampling),
     iteration = "list"
   ),
   tar_target(
     best_performance_cl,
     fitted_models_cl |>
-      rank_results(rank_metric = "rsq", select_best = FALSE),
+      rank_results(rank_metric = "rmse", select_best = FALSE),
     pattern = map(fitted_models_cl),
     iteration = "list"
   ),
