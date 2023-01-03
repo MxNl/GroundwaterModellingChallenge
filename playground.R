@@ -341,6 +341,8 @@ test |>
   filter(str_detect(member, "recipe_3_rand_forest_11_1_1"))
 
 
+testindex <- tar_read(initial_split) |> chuck(1)
+testindex$out_id
 tar_read(blended_ensemble)
 tar_read(resampling, branches = 1)
 tar_read(predictions_ensemble_test, branches = 1)
@@ -357,13 +359,50 @@ tar_read(plot_results_obs_and_preds_train_test_pred_full)
 tar_read(plot_results_obs_and_preds_train_test_pred_full) |> plotly::ggplotly()
 tar_read(recipe_wolag_logtrans_linimp_norm_zv_corr)
 tar_read(performance_table_training)
-tar_read(performance_table) 
+tar_read(performance_table) |> summarise(across(where(is.numeric), mean))
 tar_read(fitted_ensemble)
 test <- tar_read(fitted_models_cl, branches = 1)
 
 library(targets)
 library(tidyverse)
 library(tidymodels)
+
+data_join_train <- tar_read(initial_split) |> 
+  map(training) |> 
+  reduce(bind_rows) |> 
+  select(well_id, date, gwl)
+data_join_test <- tar_read(initial_split) |> 
+  map(testing) |> 
+  reduce(bind_rows) |> 
+  select(well_id, date, gwl)
+
+path_scores <- "C:/Noelscher.M/Desktop/run_6levels_5folds/"
+
+scores_run_train <- list.files(path_scores, full.names = TRUE) |>
+  map(read_csv, show_col_types = FALSE) |> 
+  map2_dfr(SPLIT_DATES$well_id, ~.x |> mutate(well_id = .y)) |> 
+  janitor::clean_names() |> 
+  select(well_id, date, .pred = simulated_head) |> 
+  inner_join(data_join_train, by = c("well_id", "date")) |> 
+  group_by(well_id) |> 
+  group_split()
+
+scores_run_test <- list.files(path_scores, full.names = TRUE) |>
+  map(read_csv, show_col_types = FALSE) |> 
+  map2_dfr(SPLIT_DATES$well_id, ~.x |> mutate(well_id = .y)) |> 
+  janitor::clean_names() |> 
+  select(well_id, date, .pred = simulated_head) |> 
+  inner_join(data_join_test, by = c("well_id", "date")) |> 
+  group_by(well_id) |> 
+  group_split()
+
+  
+scores_run_train |> 
+  make_performance_table() |> 
+  summarise(across(where(is.numeric), mean))
+scores_run_test |> 
+  make_performance_table() |> 
+  summarise(across(where(is.numeric), mean))
 
 test |> 
   purrr::chuck(1) |> 

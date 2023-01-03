@@ -1,6 +1,4 @@
 library(targets)
-library(agua)
-# library(modeltime.gluonts)
 library(tarchetypes)
 library(renv)
 
@@ -9,19 +7,19 @@ options(tidyverse.quiet = TRUE)
 tar_option_set(
   packages = c(
     "janitor",
+    "here",
+    "yaml",
     "lubridate",
     "httr",
     "data.table",
+    "parallel",
     "doParallel",
+    "relayer",
     "rlang",
     "modeltime",
-    "keras",
-    "xgboost",
     "ranger",
-    "agua",
     "timetk",
     "workflowsets",
-    "embed",
     "tidymodels",
     "stacks",
     "tidyverse"
@@ -29,10 +27,6 @@ tar_option_set(
   memory = "transient",
   garbage_collection = TRUE
 )
-
-# library(showtext)
-# Add font for ggplots
-# font_add("Corbel", regular = "C:\\Windows\\Fonts\\corbel.ttf")
 
 # Source functions
 path_functions <- "R"
@@ -59,6 +53,5 @@ c(
   targets_preprocessing,
   targets_modelling_setup,
   targets_modelling_cl,
-  # targets_modelling_mt
   targets_export
 )

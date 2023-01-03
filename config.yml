@@ -11,7 +11,7 @@ cv_initial: 0.5
 cv_assess: 24 months
 cv_skip: 12 months
 cv_lag: 365, 52
-cv_slice_max: 4
+cv_slice_max: 10
 reg_cv_folds: 5
 reg_cv_repeats: 1
 repeats: 10
@@ -21,5 +21,5 @@ allow_par: TRUE
 cores: 30
 
 # Tuning
-hyppar_combinations: 4
-hyppar_levels: 4
+hyppar_combinations: 6
+hyppar_levels: 6
