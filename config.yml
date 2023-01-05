@@ -3,7 +3,10 @@ parallel: FALSE
 
 # Scope
 single_well: FALSE
+# FALSE
 single_well_site: 1
+whole_train_split: TRUE
+# TRUE
 
 # Testing and Resampling
 initial_prop: 0.9
@@ -12,14 +15,17 @@ cv_assess: 24 months
 cv_skip: 12 months
 cv_lag: 365, 52
 cv_slice_max: 10
+# 10
 reg_cv_folds: 5
 reg_cv_repeats: 1
 repeats: 10
+# 10
 
 # Parallel
 allow_par: TRUE
 cores: 30
 
 # Tuning
-hyppar_combinations: 6
-hyppar_levels: 6
+hyppar_combinations: 5
+hyppar_levels: 5
+# 6

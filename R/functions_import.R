@@ -14,7 +14,8 @@ read_csv_and_add_path_as_column <- function(filepath, delim = ",") {
 
 import_data_allwells_github <- function(path) {
   csv_files <- PATH_GITHUB_GROUNDWATERCHALLENGE |>
-    list.files.github()
+    list.files.github() |> 
+    purrr::discard(str_detect, "submissions")
 
   data_gwl <- csv_files |>
     keep(str_detect, "heads.csv") %>%

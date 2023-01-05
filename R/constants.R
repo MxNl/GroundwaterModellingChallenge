@@ -14,7 +14,8 @@ SPLIT_DATES <- tibble::tribble(
   "USA", "2002-03-01", "2016-12-26"
 )
 SINGLE_WELL <- purrr::chuck(YML_CONFIG, "single_well")
-INITIAL_PROP <- purrr::chuck(YML_CONFIG, "initial_prop")
+WHOLE_TRAIN_SPLIT <- purrr::chuck(YML_CONFIG, "whole_train_split")
+if (isTRUE(WHOLE_TRAIN_SPLIT)) INITIAL_PROP <- 0.99 else INITIAL_PROP <- purrr::chuck(YML_CONFIG, "initial_prop")
 CV_INITIAL <- purrr::chuck(YML_CONFIG, "cv_initial")
 CV_ASSESS <- purrr::chuck(YML_CONFIG, "cv_assess")
 CV_SKIP <- purrr::chuck(YML_CONFIG, "cv_skip")

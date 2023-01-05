@@ -128,47 +128,6 @@ targets_modelling_setup <- list(
     model_grid_rf,
     make_model_grid_rf(tune_grid_rf)
   ),
-  #### boosttree
-  tar_target(
-    tune_grid_boosttree,
-    make_tune_grid_boosttree()
-  ),
-  tar_target(
-    model_grid_boosttree,
-    make_model_grid_boosttree(tune_grid_boosttree)
-  ),
-  #### xgboost
-  # tar_target(
-  #   tune_grid_xgboost,
-  #   make_tune_grid_xgboost()
-  # ),
-  # tar_target(
-  #   model_grid_xgboost,
-  #   make_model_grid_xgboost(tune_grid_xgboost)
-  # ),
-  #### prophet
-  # tar_target(
-  #   tune_grid_prophet,
-  #   make_tune_grid_prophet()
-  # ),
-  # tar_target(
-  #   model_grid_prophet,
-  #   make_model_grid_prophet(tune_grid_prophet)
-  # ),
-  #### NNetar
-  # tar_target(
-  #   tune_grid_nnetar,
-  #   make_tune_grid_nnetar()
-  # ),
-  # tar_target(
-  #   model_grid_nnetar,
-  #   make_model_grid_nnetar(tune_grid_nnetar)
-  # ),
-  #### automl
-  # tar_target(
-  #   model_automl,
-  #   make_model_automl(),
-  # ),
 
   # Workflow ----------------------------------------------------------------
 
@@ -183,15 +142,12 @@ targets_modelling_setup <- list(
         # recipe_lag_logtrans_linimp_norm_zv_corr_pca
         ),
       models = c(
-        # model_grid_boosttree$.models,
         model_grid_rf$.models,
         model_grid_mlp$.models,
         model_grid_svm$.models,
         model_grid_svmpoly$.models
       )
     ),
-      # filter(!str_detect(wflow_id, "recipe_1_mlp|recipe_3_mlp|recipe_4_mlp|recipe_5_mlp")) |>
-      # filter(str_detect(wflow_id, "recipe_1|recipe_3|recipe_4|recipe_5|recipe_2_mlp")),
     pattern = map(
       # recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca,
       # recipe_wolag_logtrans_linimp_norm_zv_augmdate_corr_pca_nodate,

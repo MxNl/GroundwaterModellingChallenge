@@ -37,27 +37,6 @@ make_plot_results_obs_and_preds <- function(x) {
       legend.title = element_blank(),
       axis.title.x = element_blank()
     )
-
-  # x |>
-  #   reduce(bind_rows) |>
-  #   pivot_longer(cols = all_of(c("gwl", ".pred"))) |>
-  #   ggplot(aes(date, value, colour = name)) +
-  #   geom_line() +
-  #   scale_colour_discrete(
-  #     labels = c("predicted", "observed"),
-  #     guide = guide_legend(
-  #       direction = "horizontal",
-  #       reverse = TRUE
-  #     )
-  #   ) +
-  #   labs(y = "Groundwater level [m asl]") +
-  #   facet_wrap(~well_id, ncol = 1, scales = "free") +
-  #   theme_minimal() +
-  #   theme(
-  #     legend.position = "top",
-  #     legend.title = element_blank(),
-  #     axis.title.x = element_blank()
-  #   )
 }
 
 make_plot_results_obs_and_preds_wtrain <- function(train_split, test_split) {

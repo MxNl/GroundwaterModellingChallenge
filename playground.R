@@ -109,7 +109,7 @@ tar_read(predictions_ensemble_test) |>
   ) |> 
   arrange(-nse)
 
-fitted_models_cl <- tar_read(fitted_models_cl, branches = 1) |> 
+fitted_models_cl <- tar_read(fitted_models_cl, branches = 2) |> 
   purrr::chuck(1)
 
 fitted_models_cl |> 
@@ -359,7 +359,8 @@ tar_read(plot_results_obs_and_preds_train_test_pred_full)
 tar_read(plot_results_obs_and_preds_train_test_pred_full) |> plotly::ggplotly()
 tar_read(recipe_wolag_logtrans_linimp_norm_zv_corr)
 tar_read(performance_table_training)
-tar_read(performance_table) |> summarise(across(where(is.numeric), mean))
+tar_read(performance_table) 
+# |> summarise(across(where(is.numeric), mean))
 tar_read(fitted_ensemble)
 test <- tar_read(fitted_models_cl, branches = 1)
 

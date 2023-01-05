@@ -9,7 +9,6 @@ targets_preprocessing <- list(
           magrittr::equals("week"),
         .f = aggregate_to_gwl_interval
       ),
-    # pattern = map(data),
     iteration = "list"
   ),
   tar_target(
@@ -42,13 +41,6 @@ targets_preprocessing <- list(
     pattern = map(data_previous_week_predictors),
     iteration = "list"
   ),
-  # tar_target(
-  #   data_imputed,
-  #   data_no_empty_cols %>%
-  #     mutate(gwl = zoo::na.approx(gwl)),
-  #   pattern = map(data_no_empty_cols),
-  #   iteration = "list"
-  # ),
   tar_target(
     data_modelling,
     slice_modelling_period(data_lagged_predictors, split_dates),

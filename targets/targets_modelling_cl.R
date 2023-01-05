@@ -31,7 +31,7 @@ targets_modelling_cl <- list(
   tar_target(
     blended_ensemble,
     model_ensemble |> 
-      blend_predictions(),
+      blend_predictions(mixture = seq(0,1,by=0.1)),
     pattern = map(model_ensemble),
     iteration = "list"
   ),
